@@ -33,8 +33,8 @@
                                     <button class="nav-link active" id="nav-ccpi-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-ccpi" type="button" role="tab" aria-controls="nav-ccpi"
                                         aria-selected="true">
-                                        <i class="fa-solid fa-heart-pulse"></i>
-                                        ประวัติการเจ็บป่วย
+                                        <i class="fa-solid fa-edit"></i>
+                                        ข้อมูลซักประวัติ
                                     </button>
                                     <button class="nav-link" id="nav-order-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-order" type="button" role="tab"
@@ -119,14 +119,12 @@
 
                     var row =
                         $(
-                            '<button role="button" class="list-group-item list-group-item-action" onclick="vnClick(this)"' + 
+                            '<button id="'+ data[i].vn +'" role="button" class="list-group-item list-group-item-action" onclick="vnClick(this)"' + 
                             ' data-id="'+ data[i].vn +'">' +
                                 '<div class="d-flex w-100 justify-content-between">' +
                                     '<h5 class="mb-1"><i class="fa-regular fa-calendar"></i> '+ vstdate +'</h5>' +
-                                    '<small class="text-muted">dx F11.2</small>' +
                                 '</div>' +
                                 '<p class="mb-1">VN : '+ data[i].vn +'</p>' +
-                                '<small>ดูรายละเอียดการตรวจรักษา</small>' +
                             '</button>'
                         );
                     $('.list-thp').append(row);
@@ -137,13 +135,17 @@
 
     function vnClick(btn) {
         var id = btn.getAttribute("data-id");
+        // document.getElementById(id).classList.add('active');
         $.ajax({
             url: "http://127.0.0.1:3000/vst/" + id,
             success: function (data) {
                 $('.ccpi').html("");
                 var row =
                     $(
-                    '<span class="badge bg-danger" style="font-size:16px;margin-bottom:0.5rem;">Vital Sign</span>' +
+                    '<span class="badge bg-danger" style="font-size:16px;margin-bottom:0.5rem;">' +
+                        '<i class="fa-solid fa-heart-pulse"></i> ' +
+                        'Vital Sign' + 
+                    '</span>' +
                     '<div class="row">' +
                         '<div class="col-md-6">' +
                             '<ul class="list-group">' +
@@ -187,7 +189,10 @@
                         '</div>' +
                     '</div>' +
                     '<br>' +
-                    '<span class="badge bg-danger" style="font-size:16px;margin-bottom:0.5rem;">CCPI</span>' +
+                    '<span class="badge bg-danger" style="font-size:16px;margin-bottom:0.5rem;">' +
+                        '<i class="fa-solid fa-clipboard"></i> ' +
+                        'CCPI' +
+                    '</span>' +
                     '<div class="row">' +
                         '<div class="col-md-12">' +
                             '<ul class="list-group">' +
