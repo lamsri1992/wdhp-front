@@ -36,17 +36,17 @@
                                         <i class="fa-solid fa-edit"></i>
                                         ข้อมูลซักประวัติ
                                     </button>
-                                    <button class="nav-link" id="nav-order-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-order" type="button" role="tab"
-                                        aria-controls="nav-order" aria-selected="false">
-                                        <i class="fa-solid fa-prescription-bottle-medical"></i>
-                                        รายการยา
-                                    </button>
                                     <button class="nav-link" id="nav-lab-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-lab" type="button" role="tab"
                                         aria-controls="nav-lab" aria-selected="false">
                                         <i class="fa-solid fa-flask-vial"></i>
                                         ผล LAB
+                                    </button>
+                                    <button class="nav-link" id="nav-order-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-order" type="button" role="tab"
+                                        aria-controls="nav-order" aria-selected="false">
+                                        <i class="fa-solid fa-prescription-bottle-medical"></i>
+                                        รายการยา
                                     </button>
                                     <button class="nav-link" id="nav-telehealth-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-telehealth" type="button" role="tab"
@@ -60,7 +60,25 @@
                                 <div class="tab-pane fade show active" id="nav-ccpi" role="tabpanel"
                                     aria-labelledby="nav-ccpi-tab">
                                     <div class="card-body" style="margin-top: 1rem;">
+                                        <div id="weltxt" class="text-center">
+                                            <p>เลือกดูรายละเอียดข้อมูลด้านซ้ายมือ</p>
+                                        </div>
                                         <div class="ccpi"></div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-lab" role="tabpanel"
+                                    aria-labelledby="nav-lab-tab">
+                                    <div class="card-body" style="margin-top: 1rem;">
+                                        <table id="lab" class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center" style="width: 30%;">รหัสแลป</th>
+                                                    <th class="" style="width: 40%;">รายการแลป</th>
+                                                    <th class="text-center" style="width: 10%;">ผลตรวจแลป</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="nav-order" role="tabpanel"
@@ -69,16 +87,15 @@
                                         รายการยา Drug Order
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="nav-lab" role="tabpanel"
-                                    aria-labelledby="nav-lab-tab">
-                                    <div class="card-body" style="margin-top: 1rem;">
-                                        รายการผล LAB - Urine
-                                    </div>
-                                </div>
                                 <div class="tab-pane fade" id="nav-telehealth" role="tabpanel"
                                     aria-labelledby="nav-telehealth-tab">
                                     <div class="card-body" style="margin-top: 1rem;">
                                         Tele-Health
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="text-end">
+                                        <small id="vnr"></small>
                                     </div>
                                 </div>
                             </div>
@@ -130,22 +147,31 @@
                     $('.list-thp').append(row);
                 }
             },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ไม่สามารถเชื่อมต่อ API ได้',
+                    text: 'Error: ' + textStatus + ' - ' + errorThrown,
+                })
+            }
         });
     });
 
     function vnClick(btn) {
         var id = btn.getAttribute("data-id");
-        // document.getElementById(id).classList.add('active');
+        document.getElementById("weltxt").hidden = true;
+        $("#vnr").html('VN : '+ id);
+
         $.ajax({
             url: "http://127.0.0.1:3000/vst/" + id,
             success: function (data) {
                 $('.ccpi').html("");
                 var row =
                     $(
-                    '<span class="badge bg-danger" style="font-size:16px;margin-bottom:0.5rem;">' +
-                        '<i class="fa-solid fa-heart-pulse"></i> ' +
+                    '<p style="font-weight:bold;">' +
+                        '<i class="fa-solid fa-heart-pulse text-danger"></i> ' +
                         'Vital Sign' + 
-                    '</span>' +
+                    '</p>' +
                     '<div class="row">' +
                         '<div class="col-md-6">' +
                             '<ul class="list-group">' +
@@ -189,10 +215,10 @@
                         '</div>' +
                     '</div>' +
                     '<br>' +
-                    '<span class="badge bg-danger" style="font-size:16px;margin-bottom:0.5rem;">' +
-                        '<i class="fa-solid fa-clipboard"></i> ' +
+                    '<p style="font-weight:bold;">' +
+                        '<i class="fa-solid fa-clipboard text-primary"></i> ' +
                         'CCPI' +
-                    '</span>' +
+                    '</p>' +
                     '<div class="row">' +
                         '<div class="col-md-12">' +
                             '<ul class="list-group">' +
@@ -205,6 +231,43 @@
                     );
                 $('.ccpi').append(row);
             },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ไม่สามารถเชื่อมต่อ API ได้',
+                    text: 'Error: ' + textStatus + ' - ' + errorThrown,
+                })
+            }
+        });
+
+        $.ajax({
+            url: "http://127.0.0.1:3000/lab/" + id,
+            success: function (data) {
+                $("#lab tbody").html("");
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].lab_order_result == 'Positive') {
+                        var result = "badge bg-danger";
+                    } else if(data[i].lab_order_result == 'Negative') {
+                        var result = "badge bg-success";
+                    }
+                var row =
+                    $(
+                        '<tr>'+
+                            '<td class="text-center">' + data[i].lab_order_number + '</td>' +
+                            '<td class="">' + data[i].lab_items_name_ref + '</td>' +
+                            '<td class="text-center"><span class="'+ result +'" style="width: 100%;">' + data[i].lab_order_result + '</span></td>' +
+                        '</tr>'
+                    );
+                    $('#lab').append(row);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ไม่สามารถเชื่อมต่อ API ได้',
+                    text: 'Error: ' + textStatus + ' - ' + errorThrown,
+                })
+            }
         });
     }
 </script>

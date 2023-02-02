@@ -29,6 +29,7 @@
                                 <th class="text-center">ข้อมูลการเข้ารับบำบัด</th>
                                 <th class="text-center">แบบคัดกรอง และส่งต่อผู้เข้ารับบำบัด</th>
                                 <th class="text-center">แบบประเมินโรคซึมเศร้า</th>
+                                <th class="text-center">สถานะ</th>
                                 <th class="text-center"><i class="fa-solid fa-bars"></i></th>
                             </tr>
                         </thead>
@@ -70,6 +71,12 @@
                                         <i class="fa-regular fa-face-smile"></i>
                                         แบบประเมิน
                                     </a>
+                                </td>
+                                <td class="text-center">
+                                    <span>
+                                        <i class="{!! $res->status_icon !!} {{ $res->status_color }}"></i>
+                                        {{ $res->status_name }}
+                                    </span>
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('met.therapy',$res->patient_id) }}" class="btn btn-circle btn-success btn-sm">
