@@ -122,7 +122,7 @@
         var hn = document.getElementById("hn").value;
         var id = document.getElementById("id").value;
         $.ajax({
-            url: "http://localhost:8550/methadone/" + hn,
+            url: "http://172.20.52.173:8550/methadone/" + hn,
             success: function (data) {
                 $('.list-thp').html("");
                 for (var i = 0; i < data.length; i++) {
@@ -172,7 +172,7 @@
         $("#vnr").html('VN : '+ id);
 
         $.ajax({
-            url: "http://localhost:8550/vst/" + id,
+            url: "http://172.20.52.173:8550/vst/" + id,
             success: function (data) {
                 $('.ccpi').html("");
                 Swal.fire({
@@ -264,7 +264,7 @@
         });
 
         $.ajax({
-            url: "http://localhost:8550/lab/" + id,
+            url: "http://172.20.52.173:8550/lab/" + id,
             success: function (data) {
                 $("#lab tbody").html("");
                 for (var i = 0; i < data.length; i++) {
@@ -294,7 +294,7 @@
         });
 
         $.ajax({
-            url: "http://localhost:8550/drug/" + id,
+            url: "http://172.20.52.173:8550/drug/" + id,
             success: function (data) {
                 $("#drug tbody").html("");
                 for (var i = 0; i < data.length; i++) {
