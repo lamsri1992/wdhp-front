@@ -22,7 +22,7 @@
                         <input id="id" name="id" type="hidden" value="{{ $patient->patient_id }}">
                     </h5>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-3" style="overflow: auto;height: 36.6rem;">
                             <div class="list-group">
                                <div class="list-thp"></div>
                             </div>
@@ -175,6 +175,20 @@
             url: "http://127.0.0.1:3000/vst/" + id,
             success: function (data) {
                 $('.ccpi').html("");
+                Swal.fire({
+                    title: 'กำลังเรียกดูข้อมูลจาก API',
+                    text: 'VN : ' + id,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    },
+                    }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        // console.log('I was closed by the timer')
+                    }
+                })
                 var row =
                     $(
                     '<p style="font-weight:bold;">' +
