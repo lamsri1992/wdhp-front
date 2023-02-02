@@ -3,8 +3,8 @@
     <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-heading">เมนูระบบ</li>
         <li class="nav-item">
-            <a class="nav-link {{ (request()->is('/')) ? '' : 'collapsed' }}"
-                href="{{ url('/') }}">
+            <a class="nav-link {{ (request()->is('home')) ? '' : 'collapsed' }}"
+                href="{{ route('home') }}">
                 <i class="fa-solid fa-folder-tree"></i>
                 <span>Monitoring - API</span>
             </a>

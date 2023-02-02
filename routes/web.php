@@ -15,9 +15,21 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['prefix' => '/'], function () {
-    Route::get('/', function () { return view('index'); });
+// Route::group(['prefix' => '/'], function () {
+//     Route::get('/', function () { return view('index'); });
+// });
+
+Auth::routes();
+Route::get('/', function () {
+    return view('auth.login');
 });
+
+Route::namespace('Auth')->group(function () {
+	Route::post('login','LoginController@login')->name('login');
+});
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::get('home','homeController@index')->name('home');
 
 Route::group(['prefix' => 'clinic'], function () {
 	Route::get('fahwanmai','fahwanmai@index')->name('fah.index');
