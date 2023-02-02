@@ -26,7 +26,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">
+                    <h5 class="card-title fw-bold">
                         <i class="fa-solid fa-user-circle"></i>
                         ทะเบียนผู้ป่วย : {{ $patient->patient_hn }}
                     </h5>
@@ -198,6 +198,7 @@
                                 </div>
                             </div>
                         </div>
+                        @if ($patient->patient_status == 1)
                         <div class="text-end" style="margin-top: 1rem">
                             <a href="{{ route('form.info',$patient->patient_id) }}" class="btn btn-outline-dark">
                                 <i class="fa-regular fa-pen-to-square"></i>
@@ -213,6 +214,9 @@
                             </a>
                             <a href="{{ route('fah.consent',$patient->patient_id) }}" class="btn btn-outline-dark" target="_blank">
                                 <i class="fa-solid fa-print"></i> พิมพ์ใบยินยอม
+                            </a>
+                            <a href="#" id="btnDischarge" class="btn btn-danger">
+                                <i class="fa-solid fa-times-circle"></i> Discharge ผู้ป่วย
                             </a>
                             <button type="button" class="btn btn-success"
                                 onclick="Swal.fire({
@@ -231,10 +235,18 @@
                                 })">
                                 <i class="fa-solid fa-edit"></i> แก้ไขข้อมูล
                             </button>
-                            <a href="{{ route('fah.list') }}" class="btn btn-danger">
-                                <i class="fa-solid fa-times-circle"></i> ยกเลิก
-                            </a>
                         </div>
+                        @else
+                        <div class="text-center" style="margin-top: 1rem;">
+                            <h5 class="fw-bold">
+                                ผู้ป่วยถูก Discharge : 
+                                <i class="fa-regular fa-calendar-check text-success"></i>
+                                วันที่ {{ DateThai($patient->patient_dc_date) }} <br><br>
+                                <i class="{!! $patient->status_icon !!} {{ $patient->status_color }}"></i>
+                                {{ $patient->status_name }}
+                            </h5>
+                        </div>
+                        @endif
                     </form>
                 </div>
             </div>
@@ -243,5 +255,45 @@
 </section>
 @endsection
 @section('script')
-
+<script type="text/javascript">
+    $('#btnDischarge').on("click", function (event) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'ยืนยันการ Discharge ผู้ป่วย',
+            text: '{{ $patient->patient_name }}',
+            showCancelButton: true,
+            confirmButtonText: `ตกลง`,
+            cancelButtonText: `ยกเลิก`,
+            icon: 'warning',
+            input: 'select',
+            inputOptions: {
+                3: 'รักษาหายขาด',
+                4: 'ติดตามไม่ได้',
+                5: 'ยกเลิกการบำบัด'
+            },
+            inputPlaceholder: 'เลือกหมายเหตุการ Discharge',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var formData = result.value;
+                var token = "{{ csrf_token() }}";
+                console.log(formData);
+                $.ajax({
+                    url: "{{ route('fah.discharge',$patient->patient_id) }}",
+                    data:{formData: formData,_token: token},
+                    success: function (data) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Discharge ผู้ป่วยสำเร็จ',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        window.setTimeout(function () {
+                            location.replace('')
+                        }, 1500);
+                    }
+                });
+            }
+        })
+    });
+</script>
 @endsection

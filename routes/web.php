@@ -27,6 +27,7 @@ Route::group(['prefix' => 'clinic'], function () {
 	Route::get('fahwanmai/list/{id}','fahwanmai@showPatient')->name('fah.patient');
 	Route::get('fahwanmai/update/{id}','fahwanmai@updatePatient')->name('fah.update');
 	Route::get('fahwanmai/consent/{id}','fahwanmai@consentPrint')->name('fah.consent');
+	Route::get('fahwanmai/discharge/{id}','fahwanmai@dischargePatient')->name('fah.discharge');
 });
 
 Route::group(['prefix' => 'clinic/fahwanmai/methadone'], function () {

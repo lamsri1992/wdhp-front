@@ -221,4 +221,16 @@ class fahwanmai extends Controller
         $patient = DB::table('patient')->where('patient_id', $id)->first();
         return view('clinic.consent',['patient'=>$patient]);
     }
+
+    public function dischargePatient(Request $request, $id)
+    {
+        $note = $request->get('formData');
+        $date = date("Y-m-d");
+        DB::table('patient')->where('patient_id', $id)->update(
+            [
+                'patient_status' => $note,
+                'patient_dc_date' => $date,
+            ]
+        );
+    }
 }
