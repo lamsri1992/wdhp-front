@@ -84,7 +84,16 @@
                                 <div class="tab-pane fade" id="nav-order" role="tabpanel"
                                     aria-labelledby="nav-order-tab">
                                     <div class="card-body" style="margin-top: 1rem;">
-                                        รายการยา Drug Order
+                                        <table id="drug" class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center" style="width: 30%;">รหัสยา</th>
+                                                    <th class="" style="width: 40%;">รายการยา</th>
+                                                    <th class="text-center" style="width: 10%;">จำนวน</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="nav-telehealth" role="tabpanel"
@@ -259,6 +268,31 @@
                         '</tr>'
                     );
                     $('#lab').append(row);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ไม่สามารถเชื่อมต่อ API ได้',
+                    text: 'Error: ' + textStatus + ' - ' + errorThrown,
+                })
+            }
+        });
+
+        $.ajax({
+            url: "http://127.0.0.1:3000/drug/" + id,
+            success: function (data) {
+                $("#drug tbody").html("");
+                for (var i = 0; i < data.length; i++) {
+                var row =
+                    $(
+                        '<tr>'+
+                            '<td class="text-center">' + data[i].icode + '</td>' +
+                            '<td class="">' + data[i].name + '</td>' +
+                            '<td class="text-center">' + data[i].qty + '</td>' +
+                        '</tr>'
+                    );
+                    $('#drug').append(row);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
