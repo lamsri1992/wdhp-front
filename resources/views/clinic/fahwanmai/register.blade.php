@@ -264,7 +264,7 @@
             if (result.dismiss === Swal.DismissReason.timer) {}
         })
         $.ajax({
-            url: "http://127.0.0.1:3000/hn/" + id,
+            url: "http://203.157.209.59:8550/hn/" + id,
             success: function (result) {
                 document.getElementById("hn_find").disabled = true;
                 if ($.trim(result)) {
