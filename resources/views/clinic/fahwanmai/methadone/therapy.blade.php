@@ -15,12 +15,22 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">
-                        <i class="fa-solid fa-clock-rotate-left"></i>
-                        ข้อมูลประวัติการเข้ารับบำบัด : {{ $patient->patient_name }}
-                        <input id="hn" name="hn" type="hidden" value="{{ $patient->patient_hn }}">
-                        <input id="id" name="id" type="hidden" value="{{ $patient->patient_id }}">
-                    </h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="card-title">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                ข้อมูลประวัติการเข้ารับบำบัด : {{ $patient->patient_name }}
+                                <input id="hn" name="hn" type="hidden" value="{{ $patient->patient_hn }}">
+                                <input id="id" name="id" type="hidden" value="{{ $patient->patient_id }}">
+                            </h5>
+                        </div>
+                        <div class="col-md-6 text-end" style="margin-top: 1rem;">
+                            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#teleH">
+                                <i class="fa-solid fa-video"></i>
+                                Tele-Health
+                            </button>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-3" style="overflow: auto;height: 36.6rem;">
                             <div class="list-group">
@@ -47,12 +57,6 @@
                                         aria-controls="nav-order" aria-selected="false">
                                         <i class="fa-solid fa-prescription-bottle-medical"></i>
                                         รายการยา
-                                    </button>
-                                    <button class="nav-link" id="nav-telehealth-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-telehealth" type="button" role="tab"
-                                        aria-controls="nav-telehealth" aria-selected="false">
-                                        <i class="fa-solid fa-video"></i>
-                                        Tele-Health
                                     </button>
                                 </div>
                             </nav>
@@ -96,12 +100,6 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="nav-telehealth" role="tabpanel"
-                                    aria-labelledby="nav-telehealth-tab">
-                                    <div class="card-body" style="margin-top: 1rem;">
-                                        Tele-Health
-                                    </div>
-                                </div>
                                 <div class="card-body">
                                     <div class="text-end">
                                         <small id="vnr"></small>
@@ -115,6 +113,32 @@
         </div>
     </div>
 </section>
+<!-- Modal -->
+<div class="modal fade" id="teleH" tabindex="-1" aria-labelledby="teleHLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="teleHLabel">
+                    <i class="fa-solid fa-video"></i>
+                    Tele-Health
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{-- <iframe 
+                    allow="camera; microphone; fullscreen; display-capture; autoplay" 
+                    src="https://meet.jit.si/{{ $patient->patient_hn }}" 
+                    style="height: 640px; width: 100%; border: 0px;">
+                </iframe> --}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+                    ซ่อนหน้าต่าง
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
 <script>
@@ -122,7 +146,8 @@
         var hn = document.getElementById("hn").value;
         var id = document.getElementById("id").value;
         $.ajax({
-            url: "http://203.157.209.59:8550/methadone/" + hn,
+            url: "http://127.0.0.1:8550/methadone/" + hn,
+            // url: "http://203.157.209.59:8550/methadone/" + hn,
             success: function (data) {
                 $('.list-thp').html("");
                 for (var i = 0; i < data.length; i++) {
@@ -172,7 +197,8 @@
         $("#vnr").html('VN : '+ id);
 
         $.ajax({
-            url: "http://203.157.209.59:8550/vst/" + id,
+            url: "http://127.0.0.1:8550/vst/" + id,
+            // url: "http://203.157.209.59:8550/vst/" + id,
             success: function (data) {
                 $('.ccpi').html("");
                 Swal.fire({
@@ -264,7 +290,8 @@
         });
 
         $.ajax({
-            url: "http://203.157.209.59:8550/lab/" + id,
+            url: "http://127.0.0.1:8550/lab/" + id,
+            // url: "http://203.157.209.59:8550/lab/" + id,
             success: function (data) {
                 $("#lab tbody").html("");
                 for (var i = 0; i < data.length; i++) {
@@ -294,7 +321,8 @@
         });
 
         $.ajax({
-            url: "http://203.157.209.59:8550/drug/" + id,
+            url: "http://127.0.0.1:8550/drug/" + id,
+            // url: "http://203.157.209.59:8550/drug/" + id,
             success: function (data) {
                 $("#drug tbody").html("");
                 for (var i = 0; i < data.length; i++) {
