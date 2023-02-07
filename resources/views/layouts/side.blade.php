@@ -1,4 +1,4 @@
-<!-- ======= Sidebar ======= -->
+a<!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-heading">เมนูระบบ</li>
@@ -9,6 +9,28 @@
                 <span>Monitoring - API</span>
             </a>
         </li>
+        <!-- Config Nav -->
+        <li class="nav-item">
+            <a class="nav-link {{ (request()->is('config*')) ? '' : 'collapsed' }}"
+                data-bs-target="#config-nav" data-bs-toggle="collapse" href="#">
+                <i class="fa-solid fa-cog"></i>
+                <span>การตั้งค่าระบบ</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="config-nav" class="nav-content collapse {{ (request()->is('config*')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('users.list') }}" class="{{ (request()->is('config/users')) ? 'active' : '' }}">
+                        <i class="bi bi-circle"></i><span>ตั้งค่าผู้ใช้งาน</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="{{ (request()->is('config/api')) ? 'active' : '' }}">
+                        <i class="bi bi-circle"></i><span>การเชื่อมต่อ API</span>
+                    </a>
+                </li>
+            </li>
+        </ul>
+        <!-- End Config Nav -->
         <li class="nav-heading">ระบบคลินิก</li>
         <!-- Fahwanmai Nav -->
         <li class="nav-item">

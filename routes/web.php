@@ -63,3 +63,7 @@ Route::group(['prefix' => 'clinic/form'], function () {
 	Route::get('9Q/{id}','form@Q9')->name('depress.9Q');
 	Route::get('8Q/{id}','form@Q8')->name('depress.8Q');
 });
+
+Route::group(['prefix' => 'config'], function () {
+	Route::get('/users','users@list')->name('users.list');
+});
