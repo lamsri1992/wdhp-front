@@ -65,5 +65,7 @@ Route::group(['prefix' => 'clinic/form'], function () {
 });
 
 Route::group(['prefix' => 'config'], function () {
-	Route::get('/users','users@list')->name('users.list');
+	Route::get('users','users@list')->name('users.list');
+	Route::get('users/add','users@add')->name('users.add');
+	Route::get('users/{id}','users@edit')->name('users.edit');
 });
