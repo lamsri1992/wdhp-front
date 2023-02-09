@@ -53,6 +53,10 @@
             <i class="fa-regular fa-face-smile"></i>
             แบบประเมิน
         </a>
+        <button id="btnDelete" class="btn btn-danger">
+            <i class="fa-regular fa-times-circle"></i>
+            ลบแบบประเมินโรคซึมเศร้า
+        </button>
     </div>
 </section>
 @endsection
@@ -89,4 +93,36 @@
     })
 </script>
 @endif
+<script type="text/javascript">
+    $('#btnDelete').on("click", function (event) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'ลบแบบประเมินโรคซึมเศร้า',
+            text: '{{ $patient->patient_name }}',
+            showCancelButton: true,
+            confirmButtonText: `ลบแบบประเมิน`,
+            cancelButtonText: `ยกเลิก`,
+            icon: 'warning',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var token = "{{ csrf_token() }}";
+                $.ajax({
+                    url: "{{ route('form.delDepress',$patient->patient_id) }}",
+                    data:{_token: token},
+                    success: function (data) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'ลบแบบประเมินโรคซึมเศร้าสำเร็จ',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        window.setTimeout(function () {
+                            location.replace('')
+                        }, 1500);
+                    }
+                });
+            }
+        })
+    });
+</script>
 @endsection

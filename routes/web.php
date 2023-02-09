@@ -56,6 +56,7 @@ Route::group(['prefix' => 'clinic/form'], function () {
 	Route::get('updateScreen/{id}','form@updateScreen')->name('methadone.updateScreen');
 	Route::get('depress/{id}','form@depress')->name('form.depress');
 	Route::get('addDepress/{id}','form@addDepress')->name('form.addDepress');
+	Route::get('delDepress/{id}','form@delDepress')->name('form.delDepress');
 	Route::get('updateDepress/{id}','form@updateDepress')->name('form.updateDepress');
 	Route::get('add2Q/{id}','form@add2Q')->name('depress.add2Q');
 	Route::get('add9Q/{id}','form@add9Q')->name('depress.add9Q');

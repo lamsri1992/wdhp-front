@@ -381,4 +381,9 @@ class form extends Controller
         $patient = DB::table('patient')->where('patient_id', $id)->first();
         return redirect()->route('form.depress', ['id' => $id])->with('success','บันทึกข้อมูลประเมินซึมเศร้า 8Q : HN: '.$patient->patient_hn." ".$patient->patient_name);
     }
+
+    public function delDepress($id)
+    {
+        DB::table('c_depress')->where('dep_patient_id',$id)->delete();
+    }
 }
