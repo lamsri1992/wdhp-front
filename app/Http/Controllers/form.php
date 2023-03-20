@@ -7,6 +7,11 @@ use DB;
 
 class form extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function info($id)
     {
         $patient = DB::table('patient')

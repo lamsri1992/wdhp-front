@@ -97,7 +97,7 @@
                 // rowReorder: {
                 //     selector: 'td:nth-child(2)'
                 // },
-                responsive: false,
+                responsive: true,
                 oLanguage: {
                     oPaginate: {
                         sFirst: '<small>หน้าแรก</small>',

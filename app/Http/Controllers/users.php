@@ -7,6 +7,11 @@ use DB;
 
 class users extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function list()
     {
         $user = DB::table('users')

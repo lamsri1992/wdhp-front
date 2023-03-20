@@ -21,9 +21,9 @@
                             </h5>
                         </div>
                         <div class="col-md-6 text-end" style="margin-top: 0.8rem;">
-                            <a href="{{ route('users.add') }}" class="btn btn-success">
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUser">
                                 <i class="fa-solid fa-user-plus"></i> เพิ่มผู้ใช้งานใหม่
-                            </a>
+                            </button>
                         </div>
                     </div>
                     <table id="tableBasic" class="table table-borderless table-striped nowrap"
@@ -67,6 +67,47 @@
         </div>
     </div>
 </section>
+<!-- Modal -->
+<div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <form action="#">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserLabel">
+                        <i class="fa-solid fa-user-plus"></i>
+                        เพิ่มผู้ใช้งานใหม่
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-sm"
+                        onclick="Swal.fire({
+                        title: 'เพิ่มผู้ใช้งานใหม่ ?',
+                        showCancelButton: true,
+                        confirmButtonText: `<i class='fa-solid fa-check-circle'></i> เพิ่มผู้ใช้งาน`,
+                        cancelButtonText: `<i class='fa-solid fa-times-circle'></i> ยกเลิก`,
+                            icon: 'success',
+                                }).then((result) => {
+                                if (result.isConfirmed) {
+                                    form.submit();
+                                } else if (result.isDenied) {
+                                    form.reset();
+                            }
+                        })">
+                        <i class="fa-solid fa-plus-circle"></i>
+                        เพิ่มผู้ใช้งานใหม่
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+                        ปิดหน้าต่าง
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
 

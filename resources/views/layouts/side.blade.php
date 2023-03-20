@@ -57,7 +57,7 @@ a<!-- ======= Sidebar ======= -->
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('fah.list') }}" class="{{ (request()->is('clinic/fahwanmai/matrix')) ? 'active' : '' }}">
+                    <a href="{{ route('mtx.index') }}" class="{{ (request()->is('clinic/fahwanmai/matrix')) ? 'active' : '' }}">
                         <i class="bi bi-circle"></i><span>Matrix Program</span>
                     </a>
                 </li>
