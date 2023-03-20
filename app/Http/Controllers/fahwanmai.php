@@ -15,7 +15,7 @@ class fahwanmai extends Controller
     public function index()
     {
         $all = DB::table('patient')->count();
-        $finish = DB::table('patient')->where('patient_status',2)->count();
+        $finish = DB::table('patient')->where('patient_status',3)->count();
         $progress = DB::table('patient')->where('patient_status',1)->count();
         $lost = DB::table('patient')->where('patient_status',4)->count();
         $count = DB::select(DB::raw("SELECT
