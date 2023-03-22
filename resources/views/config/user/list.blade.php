@@ -1,5 +1,16 @@
 @extends('layouts.app')
 @section('content')
+<style>
+    .select2-selection__rendered {
+        line-height: 35px !important;
+    }
+    .select2-container .select2-selection--single {
+        height: 39px !important;
+    }
+    .select2-selection__arrow {
+        height: 38px !important;
+    }
+</style>
 <div class="pagetitle">
     <nav style="--bs-breadcrumb-divider: '-';">
         <ol class="breadcrumb">
@@ -21,7 +32,7 @@
                             </h5>
                         </div>
                         <div class="col-md-6 text-end" style="margin-top: 0.8rem;">
-                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUser">
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addNew">
                                 <i class="fa-solid fa-user-plus"></i> เพิ่มผู้ใช้งานใหม่
                             </button>
                         </div>
@@ -47,8 +58,8 @@
                                     <td>{{ $res->name }}</td>
                                     <td>{{ $res->username }}</td>
                                     <td>{{ $res->email }}</td>
-                                    <td class="text-center">
-                                        <span class="badge bg-{{ $res->perm_color }}">
+                                    <td class="text-center" style="width: 10%;">
+                                        <span class="badge bg-{{ $res->perm_color }}" style="width: 100%;">
                                             {!! $res->perm_icon !!}
                                             {{ $res->perm_name }}
                                         </span>
@@ -56,6 +67,9 @@
                                     <td class="text-center">
                                         <a href="{{ route('users.edit',$res->id) }}" class="btn btn-secondary btn-circle btn-sm">
                                             <i class="fa-solid fa-edit"></i>
+                                        </a>
+                                        <a href="{{ route('users.reset',$res->id) }}" class="btn btn-secondary btn-circle btn-sm">
+                                            <i class="fa-solid fa-lock-open"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -68,19 +82,42 @@
     </div>
 </section>
 <!-- Modal -->
-<div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+<div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="addNewLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <form action="#">
+            <form action="{{ route('users.add') }}">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addUserLabel">
+                    <h5 class="modal-title" id="addNewLabel">
                         <i class="fa-solid fa-user-plus"></i>
                         เพิ่มผู้ใช้งานใหม่
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <input type="text" name="name" class="form-control" placeholder="ชื่อ-สกุล">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="username" class="form-control" placeholder="Username">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="password" name="password" class="form-control" placeholder="รหัสผ่าน">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="email" class="form-control" placeholder="e-mail">
+                        </div>
+                        <div class="col-md-12">
+                            <select name="permission" class="basic-select2">
+                                <option></option>
+                                @foreach ($perm as $res)
+                                <option value="{{ $res->perm_id }}">
+                                    {{ $res->perm_name }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success btn-sm"

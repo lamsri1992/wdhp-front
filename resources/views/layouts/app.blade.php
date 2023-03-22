@@ -39,7 +39,8 @@
         <span id="loading-msg"></span>
     </div>
     @include('layouts.header')
-    @include('layouts.side')
+    @if (Auth::user()->permission == 1) @include('layouts.side') @endif
+    @if (Auth::user()->permission == 2) @include('layouts.side_fah') @endif
     <main id="main" class="main">
         <div class="pagetitle">
             <h1>WDHP : ระบบข้อมูลสุขภาพ อำเภอกัลยาณิวัฒนา</h1>
@@ -118,6 +119,8 @@
             $('.basic-select2').select2({ 
                 width: '100%',
                 placeholder: 'กรุณาเลือก',
+                dropdownParent: $('#addNew'),
+
             });
         });
 
@@ -125,6 +128,8 @@
             $('.basic-multiple').select2({
                 width: '100%',
                 tags: true,
+                dropdownParent: $('#addNew'),
+
             });
         });
 

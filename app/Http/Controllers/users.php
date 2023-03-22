@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-
+use Hash;
 class users extends Controller
 {
     public function __construct()
@@ -17,6 +17,22 @@ class users extends Controller
         $user = DB::table('users')
                 ->join('u_perm','perm_id','users.permission')
                 ->get();
-        return view('config.user.list',['user'=>$user]);
+        $perm = DB::table('u_perm')->get();
+        return view('config.user.list',['user'=>$user,'perm'=>$perm]);
+    }
+
+    public function add(Request $request)
+    {
+        $perm = DB::table('u_perm')->where('perm_id',$request->permission)->first();
+        DB::table('users')->insert(
+            [
+                'name' => $request->name,
+                'username' => $request->username,
+                'password' => Hash::make($request->password),
+                'email' => $request->email,
+                'permission' => $request->permission,
+            ]
+        );
+        return back()->with('success','ลงทะเบียนผู้ใช้งานเรียบร้อย : '.$request->name." :: ".$perm->perm_name);
     }
 }

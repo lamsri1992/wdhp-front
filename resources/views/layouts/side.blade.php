@@ -28,15 +28,15 @@ a<!-- ======= Sidebar ======= -->
                         <i class="bi bi-circle"></i><span>การเชื่อมต่อ API</span>
                     </a>
                 </li>
-            </li>
-        </ul>
+            </ul>
+        </li>
         <!-- End Config Nav -->
         <li class="nav-heading">ระบบคลินิก</li>
         <!-- Fahwanmai Nav -->
         <li class="nav-item">
             <a class="nav-link {{ (request()->is('clinic/fahwanmai*') || request()->is('clinic/form*')) ? '' : 'collapsed' }}"
                 data-bs-target="#fahwanmai-nav" data-bs-toggle="collapse" href="#">
-                <i class="fa-solid fa-house-medical-flag"></i>
+                <i class="fa-solid fa-prescription-bottle-medical"></i>
                 <span>คลินิกฟ้าวันใหม่</span>
                 <i class="bi bi-chevron-down ms-auto"></i>
             </a>
@@ -61,9 +61,44 @@ a<!-- ======= Sidebar ======= -->
                         <i class="bi bi-circle"></i><span>Matrix Program</span>
                     </a>
                 </li>
+                <li>
+                    <a href="#">
+                        <i class="bi bi-circle"></i><span>ระบบรายงานข้อมูล</span>
+                    </a>
+                </li>
             </ul>
         </li>
         <!-- End Fahwanmai Nav -->
+        <li class="nav-item">
+            <a class="nav-link {{ (request()->is('clinic/anc*')) ? '' : 'collapsed' }}"
+                data-bs-target="#anc-nav" data-bs-toggle="collapse" href="#">
+                <i class="fa-solid fa-person-dress"></i>
+                <span>คลินิกฝากครรภ์</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="anc-nav" class="nav-content collapse {{ (request()->is('clinic/anc*')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="#" class="{{ (request()->is('clinic/anc')) ? 'active' : '' }}">
+                        <i class="bi bi-circle"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="bi bi-circle"></i><span>ระบบรายงานข้อมูล</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-heading">ฐานข้อมูลบริการ</li>
+         <!-- Health Nav -->
+         <li class="nav-item">
+            <a class="nav-link {{ (request()->is('visit*')) ? '' : 'collapsed' }}"
+                href="{{ route('visit.list') }}">
+                <i class="fa-solid fa-hospital-user"></i>
+                <span>ประวัติการรับบริการ</span>
+            </a>
+        </li>
+        <!-- End Health Nav -->
     </ul>
 </aside>
 <!-- End Sidebar-->

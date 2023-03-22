@@ -75,4 +75,9 @@ Route::group(['prefix' => 'config'], function () {
 	Route::get('users','users@list')->name('users.list');
 	Route::get('users/add','users@add')->name('users.add');
 	Route::get('users/{id}','users@edit')->name('users.edit');
+	Route::get('users/reset/{id}','users@reset')->name('users.reset');
+});
+
+Route::group(['prefix' => 'visit'], function () {
+	Route::get('/','visit@list')->name('visit.list');
 });
