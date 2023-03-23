@@ -112,7 +112,7 @@
         </div>
         <div class="col-lg-6">
             <!--  Card -->
-            <div class="card">
+            <div class="card" style="height: 100%;">
                 <div class="card-body">
                     <h5 class="card-title">
                         <i class="fa-solid fa-hospital-user"></i>
@@ -152,7 +152,7 @@
         </div>
         <div class="col-lg-6">
             <!--  Card -->
-            <div class="card">
+            <div class="card" style="height: 100%;">
                 <div class="card-body">
                     <h5 class="card-title">
                         <i class="fa-solid fa-calendar-check"></i>
