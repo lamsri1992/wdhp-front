@@ -86,6 +86,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" charset="utf8" src="{{ asset('vendor/datepicker/jquery.datetimepicker.full.js') }}"></script>
     <script type="text/javascript" charset="utf8" src="{{ asset('vendor/preload/preload.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+    <script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
 
     <script>
         // DATATABLES
@@ -106,10 +108,11 @@
                         sNext: '<small>ถัดไป</small>',
                         sPrevious: '<small>กลับ</small>'
                     },
-                    sSearch: '<small><i class="fa fa-search"></i> ค้นหา</small>',
-                    sInfo: '<small>ทั้งหมด _TOTAL_ รายการ</small>',
-                    sLengthMenu: '<small>แสดง _MENU_ รายการ</small>',
-                    sInfoEmpty: '<small>ไม่มีข้อมูล</small>'
+                sSearch: '<small><i class="fa fa-search"></i> ค้นหา</small>',
+                sInfo: '<small>ทั้งหมด _TOTAL_ รายการ</small>',
+                sLengthMenu: '<small>แสดง _MENU_ รายการ</small>',
+                sInfoEmpty: '<small>ไม่มีข้อมูล</small>',
+                sInfoFiltered: '<small>(ค้นหาจาก _MAX_ รายการ)</small>',
                 },
             });
         });
