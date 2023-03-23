@@ -11,6 +11,16 @@
 <section class="section">
     <div class="row">
         <div class="col-lg-12">
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <p class="mb-0">
+                    <i class="fa-regular fa-calendar-check"></i>
+                    <span>ช่วงข้อมูลตั้งแต่วันที่</span>
+                    ::
+                    <span class="fw-bold">
+                        {{ DateThai($_REQUEST['dstart'])." - ".DateThai($_REQUEST['dended']) }}
+                    </span>
+                </p>
+            </div>
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">

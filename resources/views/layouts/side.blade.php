@@ -78,12 +78,12 @@ a<!-- ======= Sidebar ======= -->
             </a>
             <ul id="anc-nav" class="nav-content collapse {{ (request()->is('clinic/anc*')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="#" class="{{ (request()->is('clinic/anc')) ? 'active' : '' }}">
+                    <a href="#" class="#">
                         <i class="bi bi-circle"></i><span>Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#ancLab">
+                    <a href="#" class="{{ (request()->is('clinic/anc/report*')) ? 'active' : '' }}" data-bs-toggle="modal" data-bs-target="#ancLab">
                         <i class="bi bi-circle"></i><span>รายงานผล LAB</span>
                     </a>
                 </li>
