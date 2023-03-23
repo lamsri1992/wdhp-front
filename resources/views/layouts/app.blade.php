@@ -39,8 +39,7 @@
         <span id="loading-msg"></span>
     </div>
     @include('layouts.header')
-    @if (Auth::user()->permission == 1) @include('layouts.side') @endif
-    @if (Auth::user()->permission == 2) @include('layouts.side_fah') @endif
+    @include('layouts.side')
     <main id="main" class="main">
         <div class="pagetitle">
             <h1>WDHP : ระบบข้อมูลสุขภาพ อำเภอกัลยาณิวัฒนา</h1>
