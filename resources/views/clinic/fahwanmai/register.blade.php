@@ -179,7 +179,7 @@
                             <div class="form-group col-md-12">
                                 <label for="">ผู้ที่อาศัยอยู่ด้วยใน 30 วันที่ผ่านมา</label>
                                 <small class="text-danger">สามารถเพิ่มตัวเลือกเองได้</small>
-                                <select class="basic-multiple" name="patient_live[]" multiple="multiple">
+                                <select class="basic-multiple2" name="patient_live[]" multiple="multiple">
                                     <option value="อยู่คนเดียว">อยู่คนเดียว</option>
                                     <option value="บิดา">บิดา</option>
                                     <option value="มารดา">มารดา</option>
@@ -239,6 +239,13 @@
 @endsection
 @section('script')
 <script>
+     $(document).ready(function() {
+            $('.basic-multiple2').select2({
+                width: '100%',
+                tags: true,
+            });
+        });
+
     document.onkeydown = fkey;
     document.onkeypress = fkey
     document.onkeyup = fkey;
