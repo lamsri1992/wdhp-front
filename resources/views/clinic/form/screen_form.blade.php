@@ -38,7 +38,7 @@
                     <tr class="text-center">
                         <th colspan="2">
                             ยา และสารเสพติดหลักที่ใช้และคัดกรองครั้งนี้คือ
-                            <select class="form-control basic-select2" name="screen_primary">
+                            <select class="form-select" name="screen_primary">
                                 <option></option>
                                 @foreach ($m_type as $res)
                                 <option value="{{ $res->m_type_id }}"
