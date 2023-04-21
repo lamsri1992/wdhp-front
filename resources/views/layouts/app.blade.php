@@ -130,6 +130,15 @@
             $('.basic-multiple').select2({
                 width: '100%',
                 tags: true,
+                // dropdownParent: $('#addNew'),
+
+            });
+        });
+
+        $(document).ready(function() {
+            $('.basic-multiple-news').select2({
+                width: '100%',
+                tags: true,
                 dropdownParent: $('#addNew'),
 
             });
