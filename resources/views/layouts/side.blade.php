@@ -93,7 +93,7 @@ a<!-- ======= Sidebar ======= -->
          <!-- Health Nav -->
          <li class="nav-item">
             <a class="nav-link {{ (request()->is('visit*')) ? '' : 'collapsed' }}"
-                href="{{ route('visit.list') }}">
+                href="{{ route('visit.index') }}">
                 <i class="fa-solid fa-hospital-user"></i>
                 <span>ประวัติการรับบริการ</span>
             </a>

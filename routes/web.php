@@ -79,7 +79,8 @@ Route::group(['prefix' => 'config'], function () {
 });
 
 Route::group(['prefix' => 'visit'], function () {
-	Route::get('/','visit@list')->name('visit.list');
+	Route::get('/','visit@index')->name('visit.index');
+	Route::get('/search','visit@search')->name('visit.search');
 });
 
 Route::group(['prefix' => 'clinic/anc'], function () {
