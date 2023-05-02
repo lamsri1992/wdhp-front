@@ -4,7 +4,7 @@
     <nav style="--bs-breadcrumb-divider: '-';">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">ฐานข้อมูลบริการ</a></li>
-            <li class="breadcrumb-item active">ประวัติการรับบริการ</li>
+            <li class="breadcrumb-item active">ค้นหาผู้รับบริการ</li>
         </ol>
     </nav>
 </div>
@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <h5 class="card-title fw-bold">
                         <i class="fa-solid fa-search"></i>
-                        ค้นหาประวัติการรับบริการ
+                        ค้นหาผู้รับบริการ
                     </h5>
                     <div class="container-fluid">
                         <form id="frm_search" action="{{ route('visit.search') }}">
@@ -23,7 +23,7 @@
                                 <input type="text" id="s_keys" name="s_keys" class="form-control" placeholder="ค้นหาจาก HN / เลข 13 หลัก / ชื่อผู้รับบริการ" aria-describedby="basic-addon2">
                                 <a href="#" id="btn_search" class="input-group-text" id="basic-addon2">
                                     <i class="fa-solid fa-search"></i>
-                                    &nbsp;ค้นหาข้อมูลประวัติการรับบริการ&nbsp;
+                                    &nbsp;ค้นหาข้อมูล&nbsp;
                                 </a>
                               </div>
                         </form>

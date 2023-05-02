@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('history', 'api\v_history');
+Route::apiResource('ccpi', 'api\v_ccpi');
+Route::apiResource('diag', 'api\v_diag');
+Route::apiResource('drug', 'api\v_drug');

@@ -81,6 +81,7 @@ Route::group(['prefix' => 'config'], function () {
 Route::group(['prefix' => 'visit'], function () {
 	Route::get('/','visit@index')->name('visit.index');
 	Route::get('/search','visit@search')->name('visit.search');
+	Route::get('/search/patient/{id}','visit@list')->name('visit.list');
 });
 
 Route::group(['prefix' => 'clinic/anc'], function () {

@@ -3,8 +3,10 @@
 <div class="pagetitle">
     <nav style="--bs-breadcrumb-divider: '-';">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">ฐานข้อมูลบริการ</a></li>
-            <li class="breadcrumb-item active">ประวัติการรับบริการ</li>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">ฐานข้อมูลบริการ</a></li>
+                <li class="breadcrumb-item active">ค้นหาผู้รับบริการ</li>
+            </ol>
         </ol>
     </nav>
 </div>
@@ -15,7 +17,7 @@
                 <div class="card-body">
                     <h5 class="card-title fw-bold">
                         <i class="fa-solid fa-search"></i>
-                        ค้นหาประวัติการรับบริการ
+                        ค้นหาผู้รับบริการ
                     </h5>
                     <div class="col-md-12">
                         <form id="frm_search" action="{{ route('visit.search') }}">
@@ -24,7 +26,7 @@
                                 placeholder="ค้นหาจาก HN / เลข 13 หลัก / ชื่อผู้รับบริการ" aria-describedby="basic-addon2">
                                 <a href="#" id="btn_search" class="input-group-text" id="basic-addon2">
                                     <i class="fa-solid fa-search"></i>
-                                    &nbsp;ค้นหาข้อมูลประวัติการรับบริการ&nbsp;
+                                    &nbsp;ค้นหาข้อมูล&nbsp;
                                 </a>
                               </div>
                         </form>
@@ -34,39 +36,40 @@
                             พบข้อมูลทั้งหมด 
                             <b>{{ count($result) }} รายการ</b>
                         </div>
-                        <table id="visit" class="table table-striped table-borderless">
+                        <table id="tableBasic" class="table table-striped table-borderless">
                             <thead>
                                 <tr>
                                     <th class="text-center">:ID</th>
-                                    <th class="text-center">DATE</th>
-                                    <th class="text-center">หน่วยบริการ</th>
-                                    <th class="text-center">VN</th>
+                                    <th class="text-center">CID</th>
                                     <th class="text-center">HN</th>
                                     <th>ผู้รับบริการ</th>
+                                    <th class="text-center">เพศ</th>
+                                    <th class="text-center">วันเกิด</th>
+                                    <th class="text-center">อายุ</th>
+                                    <th class="text-center">หน่วยบริการ</th>
+                                    <th class="text-center"><i class="fa-solid fa-bars"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($result as $res)
                                 <tr>
-                                    <td class="text-center">{{ $res->v_id }}</td>
-                                    <td class="text-center">{{ DateThai($res->visitdate) }}</td>
-                                    <td class="text-center">{{ $res->pcucode." : ".$res->h_name }}</td>
-                                    <td class="text-center">{{ $res->visitno }}</td>
+                                    <td class="text-center">{{ $res->id }}</td>
+                                    <td class="text-center">{{ substr($res->idcard,0,5)."XXXXX".substr($res->idcard,10,20) }}</td>
                                     <td class="text-center">{{ $res->hcode }}</td>
                                     <td>{{ $res->prename.$res->fname." ".$res->lname }}</td>
+                                    <td class="text-center">{{ $res->sex_name }}</td>
+                                    <td class="text-center">{{ DateThai($res->birth) }}</td>
+                                    <td class="text-center">{{ GetAge($res->birth)." ปี" }}</td>
+                                    <td class="text-center">{{ $res->pcucodeperson." : ".$res->h_name }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ route('visit.list',base64_encode($res->idcard)) }}" class="btn btn-sm btn-success">
+                                            <i class="fa-solid fa-book-medical"></i>
+                                            Visit List
+                                        </a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
                         </table>
                         {{-- @php dump($result) @endphp --}}
                     </div>
@@ -87,49 +90,6 @@
     </script>
 @endif
 <script>
-     $(document).ready(function () {
-        $('#visit').dataTable({  
-        lengthMenu: [
-            [10, 50, 100, -1],
-            [10, 50, 100, "All"]
-        ],
-            responsive: true,
-            oLanguage: {
-                oPaginate: {
-                    sFirst: '<small>หน้าแรก</small>',
-                    sLast: '<small>หน้าสุดท้าย</small>',
-                    sNext: '<small>ถัดไป</small>',
-                    sPrevious: '<small>กลับ</small>'
-                },
-                sSearch: '<small><i class="fa fa-search"></i> ค้นหา</small>',
-                sInfo: '<small>ทั้งหมด _TOTAL_ รายการ</small>',
-                sLengthMenu: '<small>แสดง _MENU_ รายการ</small>',
-                sInfoEmpty: '<small>ไม่มีข้อมูล</small>',
-                sInfoFiltered: '<small>(ค้นหาจาก _MAX_ รายการ)</small>',
-            },
-            initComplete: function() {
-                this.api().columns([2, 4, 5]).every(function() {
-                    var column = this;
-                    var select = $(
-                            '<select class="form-select"><option value="">แสดงทั้งหมด</option></select>')
-                        .appendTo($(column.footer()).empty())
-                        .on('change', function() {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
-                            column
-                                .search(val ? '^' + val + '$' : '', true, false)
-                                .draw();
-                        });
-                    column.cells('', column[0]).render('display').sort().unique().each(function(
-                        d, j) {
-                        select.append('<option value="' + d + '">' + d + '</option>')
-                });
-            });
-            }
-        });
-    });
-
     $('#btn_search').on('click', function(event){
         $('#frm_search').submit();
         event.preventDefault();
