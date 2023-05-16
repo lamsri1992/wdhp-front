@@ -37,9 +37,9 @@
                                         <i class="fa-solid fa-edit"></i>
                                         ข้อมูลซักประวัติ
                                     </button>
-                                    <button class="nav-link" id="nav-lab-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-lab" type="button" role="tab"
-                                        aria-controls="nav-lab" aria-selected="false">
+                                    <button class="nav-link" id="nav-dx-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-dx" type="button" role="tab"
+                                        aria-controls="nav-dx" aria-selected="false">
                                         <i class="fa-solid fa-comment-medical"></i>
                                         การวินิจฉัย
                                     </button>
@@ -48,6 +48,12 @@
                                         aria-controls="nav-order" aria-selected="false">
                                         <i class="fa-solid fa-prescription-bottle-medical"></i>
                                         รายการยา
+                                    </button>
+                                    <button class="nav-link" id="nav-lab-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-lab" type="button" role="tab"
+                                        aria-controls="nav-lab" aria-selected="false">
+                                        <i class="fa-solid fa-flask"></i>
+                                        รายการ LAB
                                     </button>
                                 </div>
                             </nav>
@@ -61,10 +67,10 @@
                                         <div class="ccpi"></div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="nav-lab" role="tabpanel"
-                                    aria-labelledby="nav-lab-tab">
+                                <div class="tab-pane fade" id="nav-dx" role="tabpanel"
+                                    aria-labelledby="nav-dx-tab">
                                     <div class="card-body" style="margin-top: 1rem;">
-                                        <table id="lab" class="table">
+                                        <table id="dx" class="table">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" style="">PDX:ID</th>
@@ -86,6 +92,23 @@
                                                     <th class="" style="">รายการยา</th>
                                                     <th class="" style="">คำอธิบาย</th>
                                                     <th class="text-center" style="">Unit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-lab" role="tabpanel"
+                                    aria-labelledby="nav-lab-tab">
+                                    <div class="card-body" style="margin-top: 1rem;">
+                                        <table id="lab" class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center" style="width: %;">รหัสแลป</th>
+                                                    <th class="" style="width: %;">รายการแลป</th>
+                                                    <th class="text-center" style="width: %;">ผลตรวจแลป</th>
+                                                    <th class="text-center" style="width: %;">วันที่สั่งแลป</th>
+                                                    <th class="text-center" style="width: %;">วันที่รายงาน</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -250,7 +273,7 @@
         $.ajax({
             url: "/api/diag/" + id,
             success: function (data) {
-                $("#lab tbody").html("");
+                $("#dx tbody").html("");
                 for (var i = 0; i < data.length; i++) {
                 var row =
                     $(
@@ -260,7 +283,7 @@
                             '<td class="">' + data[i].diseasenamethai + '</td>' +
                         '</tr>'
                     );
-                    $('#lab').append(row);
+                    $('#dx').append(row);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -287,6 +310,33 @@
                         '</tr>'
                     );
                     $('#drug').append(row);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ไม่สามารถเชื่อมต่อ API ได้',
+                    text: 'Error: ' + textStatus + ' - ' + errorThrown,
+                })
+            }
+        });
+
+        $.ajax({
+            url: "/api/lab/" + id,
+            success: function (data) {
+                $("#lab tbody").html("");
+                for (var i = 0; i < data.length; i++) {
+                var row =
+                    $(
+                        '<tr>'+
+                            '<td class="text-center">' + data[i].v_lab_no + '</td>' +
+                            '<td class="">' + data[i].v_lab_name + '</td>' +
+                            '<td class="">' + data[i].v_lab_result + '</td>' +
+                            '<td class="text-center">' + data[i].lab_order_date + '</td>' +
+                            '<td class="text-center">' + data[i].lab_report_date + '</td>' +
+                        '</tr>'
+                    );
+                    $('#lab').append(row);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
