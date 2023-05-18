@@ -23,3 +23,5 @@ Route::apiResource('ccpi', 'api\v_ccpi');
 Route::apiResource('diag', 'api\v_diag');
 Route::apiResource('drug', 'api\v_drug');
 Route::apiResource('lab', 'api\v_lab');
+Route::apiResource('hpi', 'api\v_hpi');
+Route::apiResource('pe', 'api\v_pe');

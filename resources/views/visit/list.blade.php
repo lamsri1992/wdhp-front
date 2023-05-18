@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3" style="overflow: auto;height: 36.6rem;">
+                        <div class="col-md-3" style="overflow: auto;height: 45rem;">
                             <div class="list-group">
                                <div class="list-thp"></div>
                             </div>
@@ -65,6 +65,8 @@
                                             <p>เลือกดูรายละเอียดข้อมูลด้านซ้ายมือ</p>
                                         </div>
                                         <div class="ccpi"></div>
+                                        <div class="hpi"></div>
+                                        <div class="pe"></div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="nav-dx" role="tabpanel"
@@ -181,8 +183,10 @@
 
      function vnClick(btn) {
         var id = btn.getAttribute("data-id");
-        // var element = document.getElementById(id);
-        //     element.classList.add("bg-warning");
+        var element = document.getElementById(id);
+            element.classList.add("bg-secondary");
+            element.classList.add("text-white");
+
         document.getElementById("weltxt").hidden = true;
         $("#vnr").html('VN : '+ id);
 
@@ -260,6 +264,76 @@
                     '</div>'
                     );
                 $('.ccpi').append(row);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ไม่สามารถเชื่อมต่อ API ได้',
+                    text: 'Error: ' + textStatus + ' - ' + errorThrown,
+                })
+            }
+        });
+
+        $.ajax({
+            url: "/api/hpi/" + id,
+            success: function (data) {
+                $(".hpi").html("");
+                for (var i = 0; i < data.length; i++) {
+                var row =
+                    $(
+                    '<br>' +
+                    '<p style="font-weight:bold;">' +
+                        '<i class="fa-solid fa-clipboard-list text-success"></i> ' +
+                        'HPI' +
+                    '</p>' +
+                    '<div class="row">' +
+                        '<div class="col-md-12">' +
+                            '<ul class="list-group">' +
+                                '<li class="list-group-item d-flex justify-content-between align-items-center">' +
+                                    '<span>' +
+                                        '<b>'+ data[0].h_entry_date + ' ' + data[0].h_entry_time + '</b><br>' + data[0].h_hpi_text +
+                                    '</span>' +
+                                '</li>' +
+                            '</ul>' +
+                        '</div>' +
+                    '</div>'
+                    );
+                    $('.hpi').append(row);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ไม่สามารถเชื่อมต่อ API ได้',
+                    text: 'Error: ' + textStatus + ' - ' + errorThrown,
+                })
+            }
+        });
+        
+        $.ajax({
+            url: "/api/pe/" + id,
+            success: function (data) {
+                $(".pe").html("");
+                for (var i = 0; i < data.length; i++) {
+                var row =
+                    $(
+                    '<br>' +
+                    '<p style="font-weight:bold;">' +
+                        '<i class="fa-solid fa-stethoscope text-secondary"></i> ' +
+                        'การตรวจร่างกาย' +
+                    '</p>' +
+                    '<div class="row">' +
+                        '<div class="col-md-12">' +
+                            '<ul class="list-group">' +
+                                '<li class="list-group-item d-flex justify-content-between align-items-center">' +
+                                    '<span>' + data[0].pe_text + '</span>' +
+                                '</li>' +
+                            '</ul>' +
+                        '</div>' +
+                    '</div>'
+                    );
+                    $('.pe').append(row);
+                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 Swal.fire({
