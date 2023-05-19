@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $data = DB::select('SELECT hos.h_name,h_visit.pcucode,hos.h_his,COUNT(*) AS total,MAX(h_visit.v_created) AS last_update
+                FROM h_visit
+                LEFT JOIN hos ON hos.h_code = h_visit.pcucode
+                GROUP BY pcucode
+                ORDER BY total DESC');
+        return view('index',['data'=>$data]);
     }
 }

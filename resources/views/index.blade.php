@@ -8,87 +8,28 @@
                 <div class="card-body">
                     <h5 class="card-title">Health Station - API </h5>
                     <!-- Default Table -->
-                    <table class="table">
+                    <table class="table table-striped table-borderless text-center" border="1">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center">H::Code</th>
-                                <th scope="col">หน่วยบริการ</th>
-                                <th scope="col" class="text-center">Status</th>
-                                <th scope="col" class="text-center">Time</th>
-                                <th scope="col" class="text-center">Start Date</th>
+                                <th scope="col">รหัสหน่วยบริการ</th>
+                                <th scope="col">ชื่อหน่วยบริการ</th>
+                                <th scope="col">ระบบ HIS</th>
+                                <th scope="col">จำนวนข้อมูล (Visit)</th>
+                                <th scope="col">วันที่ส่งข้อมูล (ล่าสุด)</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($data as $res)
                             <tr>
-                                <td class="text-center">23736</td>
-                                <td>รพช.วัดจันทร์ฯ</td>
-                                <td class="text-center">
-                                    <span class="badge bg-success">
-                                        <i class="fa-solid fa-circle-check"></i> Online
-                                    </span>
-                                </td>
-                                <td class="text-center">xx วัน</td>
-                                <td class="text-center">2566-01-01</td>
+                                <td>{{ $res->pcucode }}</td>
+                                <td>{{ $res->h_name }}</td>
+                                <td>{{ $res->h_his }}</td>
+                                <td>{{ number_format($res->total) }}</td>
+                                <td>{{ DateTimeThai($res->last_update) }}</td>
                             </tr>
-                            <tr>
-                                <td class="text-center">00000</td>
-                                <td>รพ.สต.แม่ตะละ</td>
-                                <td class="text-center">
-                                    <span class="badge bg-success">
-                                        <i class="fa-solid fa-circle-check"></i> Online
-                                    </span>
-                                </td>
-                                <td class="text-center">xx วัน</td>
-                                <td class="text-center">2566-01-01</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">00000</td>
-                                <td>รพ.สต.แม่แดด</td>
-                                <td class="text-center">
-                                    <span class="badge bg-success">
-                                        <i class="fa-solid fa-circle-check"></i> Online
-                                    </span>
-                                </td>
-                                <td class="text-center">xx วัน</td>
-                                <td class="text-center">2566-01-01</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">00000</td>
-                                <td>รพ.สต.ห้วยบง</td>
-                                <td class="text-center">
-                                    <span class="badge bg-success">
-                                        <i class="fa-solid fa-circle-check"></i> Online
-                                    </span>
-                                </td>
-                                <td class="text-center">xx วัน</td>
-                                <td class="text-center">2566-06-11</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">00000</td>
-                                <td>รพ.สต.แม่ละอูป</td>
-                                <td class="text-center">
-                                    <span class="badge bg-success">
-                                        <i class="fa-solid fa-circle-check"></i> Online
-                                    </span>
-                                </td>
-                                <td class="text-center">xx วัน</td>
-                                <td class="text-center">2566-01-01</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">00000</td>
-                                <td>สสช.ขุนแม่รวม</td>
-                                <td class="text-center">
-                                    <span class="badge bg-secondary">
-                                        <i class="fa-solid fa-circle-xmark"></i>
-                                        Offline
-                                    </span>
-                                </td>
-                                <td class="text-center">xx วัน</td>
-                                <td class="text-center">2566-01-01</td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
-                    <!-- End Default Table Example -->
                 </div>
             </div>
         </div>

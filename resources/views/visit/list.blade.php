@@ -57,7 +57,7 @@
                                     </button>
                                 </div>
                             </nav>
-                            <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-content" id="nav-tabContent" style="overflow: auto;height: 45rem;">
                                 <div class="tab-pane fade show active" id="nav-ccpi" role="tabpanel"
                                     aria-labelledby="nav-ccpi-tab">
                                     <div class="card-body" style="margin-top: 1rem;">
@@ -72,7 +72,7 @@
                                 <div class="tab-pane fade" id="nav-dx" role="tabpanel"
                                     aria-labelledby="nav-dx-tab">
                                     <div class="card-body" style="margin-top: 1rem;">
-                                        <table id="dx" class="table">
+                                        <table id="dx" class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" style="">PDX:ID</th>
@@ -87,7 +87,7 @@
                                 <div class="tab-pane fade" id="nav-order" role="tabpanel"
                                     aria-labelledby="nav-order-tab">
                                     <div class="card-body" style="margin-top: 1rem;">
-                                        <table id="drug" class="table">
+                                        <table id="drug" class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" style="">DGX:ID</th>
@@ -103,7 +103,7 @@
                                 <div class="tab-pane fade" id="nav-lab" role="tabpanel"
                                     aria-labelledby="nav-lab-tab">
                                     <div class="card-body" style="margin-top: 1rem;">
-                                        <table id="lab" class="table">
+                                        <table id="lab" class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" style="width: %;">รหัสแลป</th>
@@ -405,7 +405,7 @@
                         '<tr>'+
                             '<td class="text-center">' + data[i].v_lab_no + '</td>' +
                             '<td class="">' + data[i].v_lab_name + '</td>' +
-                            '<td class="">' + data[i].v_lab_result + '</td>' +
+                            '<td class="text-center">' + data[i].v_lab_result + '</td>' +
                             '<td class="text-center">' + data[i].lab_order_date + '</td>' +
                             '<td class="text-center">' + data[i].lab_report_date + '</td>' +
                         '</tr>'
