@@ -87,3 +87,12 @@ Route::group(['prefix' => 'visit'], function () {
 Route::group(['prefix' => 'clinic/anc'], function () {
 	Route::get('report','anc@report')->name('anc.report');
 });
+
+Route::group(['prefix' => 'clinic/ncd'], function () {
+	Route::get('','ncd@index')->name('ncd.index');
+	Route::get('/{id}','ncd@list')->name('ncd.list');
+});
+
+Route::group(['prefix' => 'lab'], function () {
+	Route::get('/','lab@list')->name('lab.list');
+});

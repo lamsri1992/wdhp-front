@@ -47,7 +47,7 @@
                                         data-bs-target="#nav-order" type="button" role="tab"
                                         aria-controls="nav-order" aria-selected="false">
                                         <i class="fa-solid fa-prescription-bottle-medical"></i>
-                                        รายการยา
+                                        รายการตรวจรักษา
                                     </button>
                                     <button class="nav-link" id="nav-lab-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-lab" type="button" role="tab"
@@ -91,7 +91,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" style="">DGX:ID</th>
-                                                    <th class="" style="">รายการยา</th>
+                                                    <th class="" style="">รายการ</th>
                                                     <th class="" style="">คำอธิบาย</th>
                                                     <th class="text-center" style="">Unit</th>
                                                 </tr>

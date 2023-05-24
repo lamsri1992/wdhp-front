@@ -23,7 +23,7 @@
                                 <input type="text" id="s_keys" name="s_keys" class="form-control" placeholder="ค้นหาจาก HN / เลข 13 หลัก / ชื่อผู้รับบริการ" aria-describedby="basic-addon2">
                                 <a href="#" id="btn_search" class="input-group-text" id="basic-addon2">
                                     <i class="fa-solid fa-search"></i>
-                                    &nbsp;ค้นหาข้อมูล&nbsp;
+                                    &nbsp;ค้นหาข้อมูล (Enter)&nbsp;
                                 </a>
                               </div>
                         </form>
@@ -36,25 +36,14 @@
 @endsection
 @section('script')
 <script>
-    $('#btn_search').on('click', function(event){
-        $('#frm_search').submit();
-        event.preventDefault();
-        let timerInterval
+    $(document).ready(function () {
         Swal.fire({
-            title: 'กำลังค้นหา',
-            html: 'Processing...',
-            // timer: 3000,
-            timerProgressBar: true,
-            didOpen: () => {
-                Swal.showLoading()
-                const b = Swal.getHtmlContainer().querySelector('b')
-                timerInterval = setInterval(() => {
-                    b.textContent = Swal.getTimerLeft()
-                }, 100)
-            },
-            willClose: () => {
-                clearInterval(timerInterval)
-            }
+            icon: 'warning',
+            title: 'โปรดระวัง',
+            text: 'ความผิดฐานเปิดเผยข้อมูลส่วนบุคคล'+
+                'ผู้ใดล่วงรู้ข้อมูลส่วนบุคคลของผู้อื่นเนื่องจากการปฏิบัติหน้าที่ตาม PDPA แล้วนำไปเปิดเผยแก่ผู้อื่น'+
+                'ต้องระวางโทษจำคุกไม่เกิน 6 เดือน หรือปรับไม่เกิน 500,000 บาท หรือทั้งจำทั้งปรับ',
+            width: '720'
         })
     });
 </script>

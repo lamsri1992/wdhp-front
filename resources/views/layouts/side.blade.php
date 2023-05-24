@@ -30,13 +30,19 @@ a<!-- ======= Sidebar ======= -->
                 </li>
             </ul>
         </li>
+        <li class="nav-item">
+            <a class="nav-link {{ (request()->is('manual*')) ? '' : 'collapsed' }}"
+                href="#" target="_blank">
+                <i class="fas fa-question-circle"></i>
+                <span>คู่มือการติดตั้ง</span>
+            </a>
+        </li>
         <!-- End Config Nav -->
         <li class="nav-heading">ระบบคลินิก</li>
         <!-- Fahwanmai Nav -->
         <li class="nav-item">
             <a class="nav-link {{ (request()->is('clinic/fahwanmai*') || request()->is('clinic/form*')) ? '' : 'collapsed' }}"
                 data-bs-target="#fahwanmai-nav" data-bs-toggle="collapse" href="#">
-                <i class="fa-solid fa-prescription-bottle-medical"></i>
                 <span>คลินิกฟ้าวันใหม่</span>
                 <i class="bi bi-chevron-down ms-auto"></i>
             </a>
@@ -72,7 +78,6 @@ a<!-- ======= Sidebar ======= -->
         <li class="nav-item">
             <a class="nav-link {{ (request()->is('clinic/anc*')) ? '' : 'collapsed' }}"
                 data-bs-target="#anc-nav" data-bs-toggle="collapse" href="#">
-                <i class="fa-solid fa-person-dress"></i>
                 <span>คลินิกฝากครรภ์</span>
                 <i class="bi bi-chevron-down ms-auto"></i>
             </a>
@@ -89,15 +94,28 @@ a<!-- ======= Sidebar ======= -->
                 </li>
             </ul>
         </li>
-        <li class="nav-heading">ฐานข้อมูลบริการ</li>
-         <!-- Health Nav -->
-         <li class="nav-item">
+        <!-- End ANC Nav -->
+        <li class="nav-item">
+            <a class="nav-link {{ (request()->is('clinic/ncd*')) ? '' : 'collapsed' }}"
+                href="{{ route('ncd.index') }}">
+                <span>คลินิกโรคไม่ติดต่อเรื้อรัง</span>
+            </a>
+        </li>
+        <!-- End NCD Nav -->
+        <li class="nav-heading">ระบบบริการ</li>
+        <!-- Health Nav -->
+        <li class="nav-item">
             <a class="nav-link {{ (request()->is('visit*')) ? '' : 'collapsed' }}"
                 href="{{ route('visit.index') }}">
-                <i class="fa-solid fa-hospital-user"></i>
                 <span>ประวัติการรับบริการ</span>
             </a>
         </li>
+        {{-- <li class="nav-item">
+            <a class="nav-link {{ (request()->is('lab*')) ? '' : 'collapsed' }}"
+                href="{{ route('lab.list') }}">
+                <span>ส่งตรวจทางห้องปฏิบัติการ</span>
+            </a>
+        </li> --}}
         <!-- End Health Nav -->
     </ul>
 </aside>

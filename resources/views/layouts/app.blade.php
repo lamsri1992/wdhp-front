@@ -99,6 +99,7 @@
                 // rowReorder: {
                 //     selector: 'td:nth-child(2)'
                 // },
+                ordering: false,
                 responsive: true,
                 oLanguage: {
                     oPaginate: {
