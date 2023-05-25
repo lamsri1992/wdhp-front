@@ -45,6 +45,7 @@
                                 <th>ชื่อผู้ใช้งาน</th>
                                 <th><i class="fa-regular fa-id-card"></i> Username</th>
                                 <th>Email</th>
+                                <th class="text-center">หน่วยบริการ</th>
                                 <th class="text-center">สิทธิ์การใช้งาน</th>
                                 <th class="text-center">
                                     <i class="fa-solid fa-bars"></i>
@@ -58,12 +59,8 @@
                                     <td>{{ $res->name }}</td>
                                     <td>{{ $res->username }}</td>
                                     <td>{{ $res->email }}</td>
-                                    <td class="text-center" style="width: 10%;">
-                                        <span class="badge bg-{{ $res->perm_color }}" style="width: 100%;">
-                                            {!! $res->perm_icon !!}
-                                            {{ $res->perm_name }}
-                                        </span>
-                                    </td>
+                                    <td class="text-center">{{ $res->h_code.' : '.$res->h_name }}</td>
+                                    <td class="text-center">{{ $res->perm_name }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('users.edit',$res->id) }}" class="btn btn-secondary btn-circle btn-sm">
                                             <i class="fa-solid fa-edit"></i>

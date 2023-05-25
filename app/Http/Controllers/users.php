@@ -16,6 +16,7 @@ class users extends Controller
     {
         $user = DB::table('users')
                 ->join('u_perm','perm_id','users.permission')
+                ->join('hos','h_code','users.pcucode')
                 ->get();
         $perm = DB::table('u_perm')->get();
         return view('config.user.list',['user'=>$user,'perm'=>$perm]);
