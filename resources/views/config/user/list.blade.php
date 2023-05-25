@@ -105,6 +105,16 @@
                             <input type="text" name="email" class="form-control" placeholder="e-mail">
                         </div>
                         <div class="col-md-12">
+                            <select name="pcucode" class="basic-select2">
+                                <option></option>
+                                @foreach ($hos as $res)
+                                <option value="{{ $res->h_code }}">
+                                    {{ $res->h_name }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-12">
                             <select name="permission" class="basic-select2">
                                 <option></option>
                                 @foreach ($perm as $res)

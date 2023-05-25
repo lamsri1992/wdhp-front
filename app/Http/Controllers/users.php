@@ -19,7 +19,9 @@ class users extends Controller
                 ->join('hos','h_code','users.pcucode')
                 ->get();
         $perm = DB::table('u_perm')->get();
-        return view('config.user.list',['user'=>$user,'perm'=>$perm]);
+        $hos = DB::table('hos')->get();
+
+        return view('config.user.list',['user'=>$user,'perm'=>$perm,'hos'=>$hos]);
     }
 
     public function add(Request $request)
@@ -31,6 +33,7 @@ class users extends Controller
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
                 'email' => $request->email,
+                'pcucode' => $request->pcucode,
                 'permission' => $request->permission,
             ]
         );

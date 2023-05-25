@@ -38,9 +38,15 @@
                                 <div class="ms-2 me-auto">
                                     <div class="">คลินิก</div>
                                     <div class="fw-bold">
+                                        @if (Auth::user()->pcucode == '23736')
+                                        <a href="{{ route('ncd.all',$res->clinic_id) }}">
+                                            {{ $res->clinic_name }}
+                                        </a>
+                                        @else
                                         <a href="{{ route('ncd.list',$res->clinic_id) }}">
                                             {{ $res->clinic_name }}
                                         </a>
+                                        @endif
                                     </div>
                                 </div>
                                 <span class="badge bg-danger rounded-pill" style="width: 5rem;">{{ number_format($res->total) }}</span>
