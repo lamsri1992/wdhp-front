@@ -74,7 +74,6 @@ a<!-- ======= Sidebar ======= -->
                 </li>
             </ul>
         </li>
-        <!-- End Fahwanmai Nav -->
         <li class="nav-item">
             <a class="nav-link {{ (request()->is('clinic/anc*')) ? '' : 'collapsed' }}"
                 data-bs-target="#anc-nav" data-bs-toggle="collapse" href="#">
@@ -97,9 +96,22 @@ a<!-- ======= Sidebar ======= -->
         <!-- End ANC Nav -->
         <li class="nav-item">
             <a class="nav-link {{ (request()->is('clinic/ncd*')) ? '' : 'collapsed' }}"
-                href="{{ route('ncd.index') }}">
+                data-bs-target="#ncd-nav" data-bs-toggle="collapse" href="#">
                 <span>คลินิกโรคไม่ติดต่อเรื้อรัง</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
             </a>
+            <ul id="ncd-nav" class="nav-content collapse {{ (request()->is('clinic/ncd*')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('ncd.index') }}" class="{{ (request()->is('clinic/ncd')) ? 'active' : '' }}">
+                        <i class="bi bi-circle"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="">
+                        <i class="bi bi-circle"></i><span>เขียนรายงาน</span>
+                    </a>
+                </li>
+            </ul>
         </li>
         <!-- End NCD Nav -->
         <li class="nav-heading">ระบบบริการ</li>

@@ -96,7 +96,12 @@
                                 <td class="text-center">{{ $res->clinic_name }}</td>
                                 <td class="text-center text-{{ $res->h_color }}">{{ $res->h_name }}</td>
                                 <td class="text-center">{{ DateThai($res->regdate) }}</td>
-                                <td class="text-center">{{ DateThai($res->apv_date) }}</td>
+                                <td class="text-center">
+                                    @if ($res->apv_status == 1)
+                                    <i class="fas fa-check-circle text-success"></i>
+                                    @endif
+                                    {{ DateThai($res->apv_date) }}
+                                </td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-secondary btn-sm"
                                     onclick="
