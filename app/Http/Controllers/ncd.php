@@ -27,9 +27,22 @@ class ncd extends Controller
         $clinic = DB::table('h_clinic')->where('clinic_id','0'.$id)->first();
         $result = DB::table('h_patient')
                 ->join('h_clinic_list','h_clinic_list.list_hn','h_patient.hcode')
+                ->join('hos','h_clinic_list.pcucode','hos.h_code')
                 ->where('h_clinic_list.clinic_id', '0'.$id)
-                ->orderBy('list_id','ASC')
+                ->orderBy('list_id','DESC')
                 ->get();
         return view('clinic.ncd.list',['result'=>$result,'clinic'=>$clinic]);
+    }
+
+    public function send(Request $request, $id)
+    {
+        $hos = $request->get('formData');
+        $date = date("Y-m-d");
+        DB::table('h_clinic_list')->where('list_id', $id)->update(
+            [
+                'pcucode' => $hos,
+                'senddate' => $date,
+            ]
+        );
     }
 }

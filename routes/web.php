@@ -91,6 +91,7 @@ Route::group(['prefix' => 'clinic/anc'], function () {
 Route::group(['prefix' => 'clinic/ncd'], function () {
 	Route::get('','ncd@index')->name('ncd.index');
 	Route::get('/{id}','ncd@list')->name('ncd.list');
+	Route::get('/send/{id}','ncd@send')->name('ncd.send');
 });
 
 Route::group(['prefix' => 'lab'], function () {
