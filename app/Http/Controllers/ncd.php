@@ -89,4 +89,16 @@ class ncd extends Controller
             ]
         );
     }
+
+    public function report(Request $request)
+    {
+        $clinic = DB::table('h_clinic')->where('clinic_id',"0".$request->repname)->first();
+        $data = DB::table('h_visit_diag')
+                ->join('h_visit','h_visit.visitno','h_visit_diag.visitno')
+                ->where('h_visit_diag.diagcode', 'like', '%'.$clinic->icd10.'%')
+                ->whereBetween('h_visit_diag.visitdate', [$request->dstart, $request->dended])
+                ->get();
+        dd($clinic,$data);
+    }
+
 }
