@@ -146,6 +146,10 @@
                                         <i class="fas fa-sign-out-alt"></i>
                                         ส่งต่อผู้ป่วย
                                     </a>
+                                    <a href="{{ route('visit.list',base64_encode($res->idcard)) }}" class="btn btn-sm btn-success">
+                                        <i class="fa-solid fa-book-medical"></i>
+                                        Visit List
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach
