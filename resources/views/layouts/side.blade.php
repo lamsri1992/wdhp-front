@@ -107,8 +107,8 @@ a<!-- ======= Sidebar ======= -->
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="" data-bs-toggle="modal" data-bs-target="#ncdReport">
-                        <i class="bi bi-circle"></i><span>เขียนรายงาน</span>
+                    <a href="{{ route('ncd.consult') }}" class="{{ (request()->is('clinic/consult')) ? 'active' : '' }}">
+                        <i class="bi bi-circle"></i><span>Tele-Consult</span>
                     </a>
                 </li>
             </ul>
@@ -166,52 +166,6 @@ a<!-- ======= Sidebar ======= -->
                                     หากต้องการเพิ่ม LAB / ICD10 กรุณาแจ้งผู้ดูแลระบบ
                                 </p>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">
-                        <i class="fa-solid fa-print"></i>
-                        ออกรายงาน
-                    </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- NCD MODAL -->
-<div class="modal fade" id="ncdReport" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <form action="{{ route('ncd.report') }}">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">เขียนรายงานข้อมูล NCD</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row g-3">
-                        <div class="col-6">
-                            <label for="" class="form-label">วันที่เริ่มต้น</label>
-                            <input type="text" name="dstart" class="basicDate form-control" readonly>
-                        </div>
-                        <div class="col-6">
-                            <label for="" class="form-label">วันที่สิ้นสุด</label>
-                            <input type="text" name="dended" class="basicDate form-control" readonly>
-                        </div>
-                        <div class="col-12">
-                            <label for="" class="form-label">ชื่อรายงาน</label>
-                            <select name="repname" class="form-select">
-                                <optgroup label="รายงาน">
-                                <option value="">--- กรุณาระบุ ---</option>
-                                @foreach ($report as $res)
-                                <option value="{{ $res->clinic_id }}">
-                                    {{ "คลินิก".$res->clinic_name }}
-                                </option>
-                                @endforeach
-                            </optgroup>
-                            </select>
                         </div>
                     </div>
                 </div>

@@ -24,7 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $report = DB::table('h_clinic')->where('active','Y')->where('icd10', '!=', NULL)->get();
-        view()->share('report', $report);
+        
     }
 }

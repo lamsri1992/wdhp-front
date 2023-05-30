@@ -111,4 +111,9 @@ class ncd extends Controller
         dd($clinic,$data);
     }
 
+    public function consult()
+    {
+       return view('clinic.ncd.consult');
+    }
+
 }
