@@ -53,6 +53,27 @@
     </a>
 </div>
 @endif
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">
+            <i class="fas fa-clinic-medical"></i>
+            จำนวนผู้ป่วยแยกตามหน่วยบริการ
+        </h5>
+        <ul class="list-group">
+            @foreach ($count as $res)
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ $res->h_name }}
+                <span class="badge bg-primary rounded-pill" style="width: 5rem;">
+                    {{ $res->total." ราย" }}
+                </span>
+            </li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+
+
 <section class="section">
     <div class="row">
         <div class="col-lg-12">
@@ -99,8 +120,13 @@
                                 <td class="text-center">
                                     @if ($res->apv_status == 1)
                                     <i class="fas fa-check-circle text-success"></i>
-                                    @endif
                                     {{ DateThai($res->apv_date) }}
+                                    @else
+                                    <span class="text-danger">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                        รอดำเนินการ
+                                    </span>
+                                    @endif
                                 </td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-secondary btn-sm"

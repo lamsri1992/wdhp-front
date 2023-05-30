@@ -11,7 +11,7 @@
 </div>
 <section class="section">
     <div class="row align-items-top">
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <!--  Card -->
             <div class="card" style="height: 100%;">
                 <div class="card-body">
@@ -26,7 +26,7 @@
             </div>
             <!-- End Card -->
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <!--  Card -->
             <div class="card" style="height: 100%;">
                 <div class="card-body">
@@ -49,7 +49,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <span class="badge bg-danger rounded-pill" style="width: 5rem;">{{ number_format($res->total) }}</span>
+                                <span class="badge bg-danger rounded-pill" style="width: 6rem;">{{ number_format($res->total)." ราย" }}</span>
                             </li>
                             @endforeach
                         </ol>

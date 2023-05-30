@@ -25,22 +25,26 @@ class ncd extends Controller
 
     public function all($id)
     {
-        $clinic = DB::table('h_clinic')->where('clinic_id','0'.$id)->first();
+        $cid = '0'.$id;
+        $clinic = DB::table('h_clinic')->where('clinic_id',$cid)->first();
         $result = DB::table('h_patient')
                 ->join('h_clinic_list','h_clinic_list.list_hn','h_patient.hcode')
                 ->join('hos','h_clinic_list.pcucode','hos.h_code')
-                ->where('h_clinic_list.clinic_id', '0'.$id)
-                // ->where('h_clinic_list.pcucode', Auth::user()->pcucode)
-                // ->where('h_clinic_list.apv_status', 1)
+                ->where('h_clinic_list.clinic_id', $cid)
                 ->orderBy('list_id','DESC')
                 ->get();
         $incase = DB::table('h_clinic_list')
                 ->join('h_patient','h_patient.hcode','h_clinic_list.list_hn')
                 ->where('h_clinic_list.pcucode', Auth::user()->pcucode)
                 ->where('h_clinic_list.apv_status', 0)
-                ->where('h_clinic_list.clinic_id', '0'.$id)
-                ->get(); 
-        return view('clinic.ncd.all',['result'=>$result,'clinic'=>$clinic,'incase'=> $incase]);
+                ->where('h_clinic_list.clinic_id', $cid)
+                ->get();
+        $count = DB::select("SELECT hos.h_name,COUNT(h_clinic_list.list_id) AS total
+                FROM h_clinic_list
+                LEFT JOIN hos ON hos.h_code = h_clinic_list.pcucode
+                WHERE h_clinic_list.clinic_id = $cid
+                GROUP BY hos.h_code");
+        return view('clinic.ncd.all',['result'=>$result,'clinic'=>$clinic,'incase'=> $incase,'count'=> $count]);
     }
 
     public function list($id)
@@ -72,6 +76,7 @@ class ncd extends Controller
                 'pcucode' => $hos,
                 'senddate' => $date,
                 'apv_status' => 0,
+                'apv_date' => NULL,
             ]
         );
     }
