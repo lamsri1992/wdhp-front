@@ -97,23 +97,8 @@ class ncd extends Controller
 
     public function report(Request $request)
     {
-        $clinic = DB::table('h_clinic')->where('clinic_id',"0".$request->repname)->first();
-        $data = DB::table('h_visit_diag')
-                ->select('h_visit_diag.visitdate','h_visit_diag.visitno','h_visit_diag.diagcode','h_visit_diag.diseasenamethai','h_visit.pid',
-                'h_patient.hcode','h_patient.prename','h_patient.fname','h_patient.lname','h_visit.pressure','h_visit_lab.v_lab_name','h_visit_lab.v_lab_result')
-                ->leftjoin('h_visit','h_visit.visitno','h_visit_diag.visitno')
-                ->leftjoin('h_patient','h_patient.pid','h_visit.pid')
-                ->leftjoin('h_visit_lab','h_visit_lab.v_lab_vn','h_visit_diag.visitno')
-                ->where('h_visit_diag.diagcode', 'like', '%'.$clinic->icd10.'%')
-                ->where('h_visit_lab.v_lab_name', 'like', '%FBS%')
-                ->whereBetween('h_visit_diag.visitdate', [$request->dstart, $request->dended])
-                ->get();
+        $clinic = DB::table('h_clinic')->where('clinic_id', $request->clinic)->first();
+        $data = DB::table('h_clinic_list')->get();
         dd($clinic,$data);
     }
-
-    public function consult()
-    {
-       return view('clinic.ncd.consult');
-    }
-
 }

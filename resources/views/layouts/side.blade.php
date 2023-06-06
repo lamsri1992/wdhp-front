@@ -107,8 +107,8 @@ a<!-- ======= Sidebar ======= -->
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('ncd.consult') }}" class="{{ (request()->is('clinic/consult')) ? 'active' : '' }}">
-                        <i class="bi bi-circle"></i><span>Tele-Consult</span>
+                    <a href="#" class="{{ (request()->is('clinic/ncd/report')) ? 'active' : '' }}" data-bs-toggle="modal" data-bs-target="#ncdReport">
+                        <i class="bi bi-circle"></i><span>ระบบรายงานข้อมูล</span>
                     </a>
                 </li>
             </ul>
@@ -119,15 +119,15 @@ a<!-- ======= Sidebar ======= -->
         <li class="nav-item">
             <a class="nav-link {{ (request()->is('visit*')) ? '' : 'collapsed' }}"
                 href="{{ route('visit.index') }}">
-                <span>ประวัติการรับบริการ</span>
+                <span>ข้อมูลประวัติการรับบริการ</span>
             </a>
         </li>
-        {{-- <li class="nav-item">
-            <a class="nav-link {{ (request()->is('lab*')) ? '' : 'collapsed' }}"
-                href="{{ route('lab.list') }}">
-                <span>ส่งตรวจทางห้องปฏิบัติการ</span>
+        <li class="nav-item">
+            <a class="nav-link {{ (request()->is('consult*')) ? '' : 'collapsed' }}"
+                href="{{ route('visit.tele') }}">
+                <span>ระบบปรึกษาแพทย์ทางไกล</span>
             </a>
-        </li> --}}
+        </li>
         <!-- End Health Nav -->
     </ul>
 </aside>
@@ -166,6 +166,49 @@ a<!-- ======= Sidebar ======= -->
                                     หากต้องการเพิ่ม LAB / ICD10 กรุณาแจ้งผู้ดูแลระบบ
                                 </p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa-solid fa-print"></i>
+                        ออกรายงาน
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ANC MODAL -->
+<div class="modal fade" id="ncdReport" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <form action="{{ route('ncd.report') }}">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ระบบรายงานข้อมูล NCD</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <label for="" class="form-label">วันที่เริ่มต้น</label>
+                            <input type="text" name="dstart" class="basicDate form-control" readonly>
+                        </div>
+                        <div class="col-6">
+                            <label for="" class="form-label">วันที่สิ้นสุด</label>
+                            <input type="text" name="dended" class="basicDate form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="" class="form-label">รายการคลินิก</label>
+                            <select name="clinic" class="form-select">
+                                <option>----- กรุณาเลือกคลินิก -----</option>
+                                <option value="021">เบาหวาน</option>
+                                <option value="022">ความดัน</option>
+                            </select>
                         </div>
                     </div>
                 </div>
