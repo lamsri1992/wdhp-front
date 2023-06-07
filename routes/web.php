@@ -101,4 +101,4 @@ Route::group(['prefix' => 'lab'], function () {
 	Route::get('/','lab@list')->name('lab.list');
 });
 
-Route::get('/consult','url@consult')->name('visit.tele');
+Route::get('/exjhcis','url@exjhcis')->name('visit.exjhcis');

@@ -7,8 +7,8 @@ use DB;
 
 class url extends Controller
 {
-    public function consult()
+    public function exjhcis()
     {
-       return view('visit.consult');
+       return view('visit.exjhcis');
     }
 }

@@ -123,9 +123,9 @@ a<!-- ======= Sidebar ======= -->
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ (request()->is('consult*')) ? '' : 'collapsed' }}"
-                href="{{ route('visit.tele') }}">
-                <span>ระบบปรึกษาแพทย์ทางไกล</span>
+            <a class="nav-link {{ (request()->is('exjhcis*')) ? '' : 'collapsed' }}"
+                href="{{ route('visit.exjhcis') }}">
+                <span>ระบบเสริมสำหรับ รพ.สต. (JHCIS)</span>
             </a>
         </li>
         <!-- End Health Nav -->
