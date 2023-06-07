@@ -206,7 +206,6 @@ a<!-- ======= Sidebar ======= -->
                             <label for="" class="form-label">รายการคลินิก</label>
                             <select name="clinic" class="form-select">
                                 <option>----- กรุณาเลือกคลินิก -----</option>
-                                <option value="021">เบาหวาน</option>
                                 <option value="022">ความดัน</option>
                             </select>
                         </div>

@@ -97,8 +97,18 @@ class ncd extends Controller
 
     public function report(Request $request)
     {
-        $clinic = DB::table('h_clinic')->where('clinic_id', $request->clinic)->first();
-        $data = DB::table('h_clinic_list')->get();
-        dd($clinic,$data);
+        $cnic = DB::table('h_clinic')->where('clinic_id', $request->clinic)->first();
+        $data = DB::table('h_clinic_list')
+                ->select('h_visit.visitdate','h_clinic_list.pcucode','h_patient.hcode','h_patient.prename','h_patient.fname','h_patient.lname','h_patient.birth','h_visit.pressure','hos.h_name')
+                ->join('h_patient','h_patient.hcode','h_clinic_list.list_hn')
+                ->join('h_visit','h_visit.pid','h_patient.pid')
+                ->join('hos','h_clinic_list.pcucode','hos.h_code')
+                ->where('clinic_id',$cnic->clinic_id)
+                ->where('h_visit.pressure','!=','')
+                ->whereBetween('h_visit.visitdate',[$request->dstart,$request->dended])
+                ->groupBy('h_patient.hcode')
+                ->get();
+        return view('clinic.ncd.report',['cnic'=>$cnic,'data'=>$data]);
     }
+
 }
