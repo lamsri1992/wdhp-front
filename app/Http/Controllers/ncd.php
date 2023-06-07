@@ -83,16 +83,22 @@ class ncd extends Controller
 
     public function approve(Request $request, $id)
     {
+        $update = DB::table('h_clinic_list')
+                ->where('pcucode', Auth::user()->pcucode)
+                ->where('apv_status', 0)
+                ->get();
+        // dd($update);
         $date = date("Y-m-d");
-        DB::table('h_clinic_list')
-            ->where('pcucode', Auth::user()->pcucode)
-            ->where('clinic_id', '0'.$id)
-            ->update(
-            [
-                'apv_status' => 1,
-                'apv_date' => $date,
-            ]
-        );
+        foreach ($update as $res){
+            DB::table('h_clinic_list')
+                ->where('list_id', $res->list_id)
+                ->update(
+                [
+                    'apv_status' => 1,
+                    'apv_date' => $date,
+                ]
+            );
+        }
     }
 
     public function report(Request $request)
