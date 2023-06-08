@@ -128,6 +128,12 @@ a<!-- ======= Sidebar ======= -->
                 <span>ระบบเสริมสำหรับ รพ.สต. (JHCIS)</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link {{ (request()->is('consult*')) ? '' : 'collapsed' }}"
+                href="{{ route('consult.list') }}">
+                <span>รายการขอคำปรึกษาแพทย์</span>
+            </a>
+        </li>
         <!-- End Health Nav -->
     </ul>
 </aside>
