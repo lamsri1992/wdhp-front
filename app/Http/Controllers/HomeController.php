@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = DB::select('SELECT hos.h_name,h_visit.pcucode,hos.h_his,COUNT(*) AS total,MAX(h_visit.v_created) AS last_update
+        $data = DB::select('SELECT hos.h_name,h_visit.pcucode,hos.h_his,COUNT(*) AS total,MAX(h_visit.v_created) AS last_update,MAX(h_visit.visitdate) AS last_visit
                 FROM h_visit
                 LEFT JOIN hos ON hos.h_code = h_visit.pcucode
                 GROUP BY pcucode

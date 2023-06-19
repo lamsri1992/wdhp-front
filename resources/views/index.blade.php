@@ -15,6 +15,7 @@
                                 <th scope="col">ชื่อหน่วยบริการ</th>
                                 <th scope="col">ระบบ HIS</th>
                                 <th scope="col">จำนวนข้อมูล (Visit)</th>
+                                <th scope="col">VisitDate (ล่าสุด)</th>
                                 <th scope="col">วันที่ส่งข้อมูล (ล่าสุด)</th>
                             </tr>
                         </thead>
@@ -25,6 +26,7 @@
                                 <td>{{ $res->h_name }}</td>
                                 <td>{{ $res->h_his }}</td>
                                 <td>{{ number_format($res->total) }}</td>
+                                <td>{{ DateThai($res->last_visit) }}</td>
                                 <td>{{ DateTimeThai($res->last_update) }}</td>
                             </tr>
                             @endforeach
