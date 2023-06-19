@@ -78,6 +78,10 @@ Route::group(['prefix' => 'config'], function () {
 	Route::get('users/reset/{id}','users@reset')->name('users.reset');
 });
 
+Route::group(['prefix' => 'config'], function () {
+	Route::get('api','HomeController@apiCheck')->name('api.list');
+});
+
 Route::group(['prefix' => 'visit'], function () {
 	Route::get('/','visit@index')->name('visit.index');
 	Route::get('/search','visit@search')->name('visit.search');

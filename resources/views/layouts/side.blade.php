@@ -24,7 +24,7 @@ a<!-- ======= Sidebar ======= -->
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="{{ (request()->is('config/api')) ? 'active' : '' }}">
+                    <a href="{{ route('api.list') }}" class="{{ (request()->is('config/api')) ? 'active' : '' }}">
                         <i class="bi bi-circle"></i><span>การเชื่อมต่อ API</span>
                     </a>
                 </li>
