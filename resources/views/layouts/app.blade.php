@@ -7,6 +7,7 @@
     <title>WDHP : ระบบข้อมูลสุขภาพ อำเภอกัลยาณิวัฒนา</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicons -->
     <link href="{{ asset('img/wc_logo_2.png') }}" rel="icon">
     <link href="{{ asset('img/wc_logo_2.png') }}" rel="apple-touch-icon">
@@ -87,6 +88,7 @@
     <script type="text/javascript" charset="utf8" src="{{ asset('vendor/preload/preload.js') }}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
     <script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('js/webcam.min.js') }}"></script>
 
     <script>
         // DATATABLES

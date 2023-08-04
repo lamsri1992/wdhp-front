@@ -132,8 +132,31 @@
 </section>
 @endsection
 @section('script')
+@if ($patient->consent_status == 1)
+    <script>
+        Swal.fire({
+            icon: 'warning',
+            title: 'ไม่สามารถดูประวัติได้',
+            text: 'ผู้รับบริการยังไม่ได้ยืนยันตัวตน',
+            footer: '<a href="{{ route("visit.consent",base64_encode($patient->idcard)) }}" class="btn btn-sm btn-primary"><i class="fa-regular fa-address-card"></i> ทำการยืนยันตัวตน</a>',
+            backdrop: 'black',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+        })
+    </script>
+@else
 <script>
-        $( document ).ready(function() {
+    Swal.fire({
+        icon: 'success',
+        title: 'ยินยอมเปิดเผยข้อมูล',
+        text: '{{ "บันทึกโดย : ".$patient->consent_approve." เมื่อวันที่ ".DateThai($patient->consent_approve_date) }}',
+        html:'<img src="{{ asset("storage/uploads/".$patient->id.".png") }}" class="img-fluid img-thumbnail">',
+    })
+</script>
+@endif
+<script>
+    $(document).ready(function() {
         var cid = {{ $patient->idcard }};
         $.ajax({
             url: "/api/history/" + cid,

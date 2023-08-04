@@ -56,7 +56,19 @@
                                     <td class="text-center">{{ $res->id }}</td>
                                     <td class="text-center">{{ substr($res->idcard,0,5)."XXXXX".substr($res->idcard,10,20) }}</td>
                                     <td class="text-center">{{ $res->hcode }}</td>
-                                    <td>{{ $res->prename.$res->fname." ".$res->lname }}</td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                {{ $res->prename.$res->fname." ".$res->lname }}
+                                            </div>
+                                            <div class="col-md-6 text-end">
+                                                <span class="badge bg-{{ $res->con_color }}" style="width: 100%;">
+                                                    {!! $res->con_icon !!}
+                                                    {{ $res->con_name }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td class="text-center">{{ $res->sex_name }}</td>
                                     <td class="text-center">{{ DateThai($res->birth) }}</td>
                                     <td class="text-center">{{ GetAge($res->birth)." ปี" }}</td>

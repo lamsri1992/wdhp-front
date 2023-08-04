@@ -86,6 +86,8 @@ Route::group(['prefix' => 'visit'], function () {
 	Route::get('/','visit@index')->name('visit.index');
 	Route::get('/search','visit@search')->name('visit.search');
 	Route::get('/search/patient/{id}','visit@list')->name('visit.list');
+	Route::get('/consent/{id}','visit@consent')->name('visit.consent');
+	Route::post('/confirm/{id}','visit@confirm')->name('visit.confirm');
 });
 
 Route::group(['prefix' => 'clinic/anc'], function () {
