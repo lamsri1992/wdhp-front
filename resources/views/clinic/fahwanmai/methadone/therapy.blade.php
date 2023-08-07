@@ -25,6 +25,10 @@
                             </h5>
                         </div>
                         <div class="col-md-6 text-end" style="margin-top: 1rem;">
+                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#hdrug">
+                                <i class="fa-solid fa-prescription-bottle"></i>
+                                หน่วยบริการที่จ่ายยา ::  {{ $patient->h_name }}
+                            </button>
                             <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#teleH">
                                 <i class="fa-solid fa-video"></i>
                                 Tele-Health
@@ -113,6 +117,56 @@
         </div>
     </div>
 </section>
+<!-- Modal -->
+<div class="modal fade" id="hdrug" tabindex="-1" aria-labelledby="hdrugLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hdrugLabel">
+                        <i class="fa-solid fa-prescription-bottle"></i>
+                        หน่วยบริการที่จ่ายยา ::  {{ $patient->h_name }}
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <select name="" class="form-select">
+                        <option value="">----- กรุณาเลือก -----</option>
+                        @foreach ($hos as $res)
+                        <option value="{{ $res->h_id }}"
+                            {{ $patient->patient_hdrug == $res->h_id ? 'selected' : '' }}>
+                            {{ $res->h_name }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-sm"
+                        onclick="Swal.fire({
+                            title: 'แก้ไขหน่วยบริการที่จ่ายยา ?',
+                            showCancelButton: true,
+                            confirmButtonText: `<i class='fa-solid fa-check-circle'></i> ตกลง`,
+                            cancelButtonText: `<i class='fa-solid fa-times-circle'></i> ยกเลิก`,
+                            icon: 'success',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            } else if (result.isDenied) {
+                                form.reset();
+                            }
+                        })">
+                        <i class="fa-solid fa-edit"></i>
+                        แก้ไข
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+                        ยกเลิก
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <!-- Modal -->
 <div class="modal fade" id="teleH" tabindex="-1" aria-labelledby="teleHLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">

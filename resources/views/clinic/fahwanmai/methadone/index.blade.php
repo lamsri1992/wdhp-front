@@ -29,6 +29,7 @@
                                 <th class="text-center">ข้อมูลการเข้ารับบำบัด</th>
                                 <th class="text-center">แบบคัดกรอง และส่งต่อผู้เข้ารับบำบัด</th>
                                 <th class="text-center">แบบประเมินโรคซึมเศร้า</th>
+                                <th class="text-center">หน่วยบริการที่จ่ายยา</th>
                                 <th class="text-center">สถานะ</th>
                                 <th class="text-center"><i class="fa-solid fa-bars"></i></th>
                             </tr>
@@ -71,6 +72,11 @@
                                         <i class="fa-regular fa-face-smile"></i>
                                         แบบประเมิน
                                     </a>
+                                </td>
+                                <td class="text-center">
+                                    <span>
+                                        {{ $res->h_name }}
+                                    </span>
                                 </td>
                                 <td class="text-center">
                                     <span>
