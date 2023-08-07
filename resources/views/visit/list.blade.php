@@ -150,8 +150,8 @@
     Swal.fire({
         icon: 'success',
         title: 'ยินยอมเปิดเผยข้อมูล',
-        text: '{{ "บันทึกโดย : ".$patient->consent_approve." เมื่อวันที่ ".DateThai($patient->consent_approve_date) }}',
-        html:'<img src="{{ asset("storage/uploads/".$patient->id.".png") }}" class="img-fluid img-thumbnail">',
+        html:'<img src="{{ asset("storage/uploads/".$patient->id.".png") }}" class="img-fluid img-thumbnail">' +
+             '<span>{{ "บันทึกโดย : ".$patient->consent_approve." เมื่อวันที่ ".DateThai($patient->consent_approve_date) }}</span>',
     })
 </script>
 @endif
