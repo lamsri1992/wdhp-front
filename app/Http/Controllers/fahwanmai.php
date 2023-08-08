@@ -61,6 +61,24 @@ class fahwanmai extends Controller
         return view('clinic.fahwanmai.list',['patient'=>$patient,'program'=>$program]);
     }
 
+    public function status($id)
+    {
+        $status_id = base64_decode($id);
+        if($status_id == 0){
+            return redirect()->route('fah.list');
+        }else{
+            $patient = DB::table('patient')
+                    ->join('patient_program','patient_program.patient_hn','patient.patient_hn')
+                    ->join('program','program.program_id','patient_program.program_id')
+                    ->join('patient_status','patient_status.status_id','patient.patient_status')
+                    ->where('patient.patient_status', $status_id)
+                    ->get();
+            $program = DB::table('program')->get();
+    
+            return view('clinic.fahwanmai.list',['patient'=>$patient,'program'=>$program]);
+        }
+    }
+
     public function register()
     {
         $religion = DB::table('religion')->get();

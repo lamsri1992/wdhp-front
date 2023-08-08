@@ -31,15 +31,16 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('home','homeController@index')->name('home');
 
-Route::group(['prefix' => 'clinic'], function () {
-	Route::get('fahwanmai','fahwanmai@index')->name('fah.index');
-	Route::get('fahwanmai/list','fahwanmai@list')->name('fah.list');
-	Route::get('fahwanmai/register','fahwanmai@register')->name('fah.register');
-	Route::get('fahwanmai/register/add','fahwanmai@newPatient')->name('fah.add');
-	Route::get('fahwanmai/list/{id}','fahwanmai@showPatient')->name('fah.patient');
-	Route::get('fahwanmai/update/{id}','fahwanmai@updatePatient')->name('fah.update');
-	Route::get('fahwanmai/consent/{id}','fahwanmai@consentPrint')->name('fah.consent');
-	Route::get('fahwanmai/discharge/{id}','fahwanmai@dischargePatient')->name('fah.discharge');
+Route::group(['prefix' => 'clinic/fahwanmai'], function () {
+	Route::get('/','fahwanmai@index')->name('fah.index');
+	Route::get('list','fahwanmai@list')->name('fah.list');
+	Route::get('status/{id}','fahwanmai@status')->name('fah.status');
+	Route::get('register','fahwanmai@register')->name('fah.register');
+	Route::get('register/add','fahwanmai@newPatient')->name('fah.add');
+	Route::get('list/{id}','fahwanmai@showPatient')->name('fah.patient');
+	Route::get('update/{id}','fahwanmai@updatePatient')->name('fah.update');
+	Route::get('consent/{id}','fahwanmai@consentPrint')->name('fah.consent');
+	Route::get('discharge/{id}','fahwanmai@dischargePatient')->name('fah.discharge');
 });
 
 Route::group(['prefix' => 'clinic/fahwanmai/methadone'], function () {

@@ -15,16 +15,42 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <h5 class="card-title">
                                 <i class="fa-regular fa-folder-open"></i>
                                 ทะเบียนผู้ป่วย
                             </h5>
                         </div>
-                        <div class="col-md-6 text-end" style="margin-top: 0.8rem;">
-                            <a href="{{ route('fah.register') }}" class="btn btn-success">
-                                <i class="fa-solid fa-user-plus"></i> ลงทะเบียนผู้ป่วย
-                            </a>
+                        <div class="col-md-8 text-end" style="margin-top: 1rem;">
+                            <div class="btn-group" role="group">
+                                <a href="{{ route('fah.status',base64_encode(0)) }}" class="btn btn-sm btn-primary">
+                                    <i class="fa-solid fa-list"></i>
+                                    ทั้งหมด
+                                </a>
+                                <a href="{{ route('fah.status',base64_encode(1)) }}" class="btn btn-sm btn-primary">
+                                    <i class="fa-solid fa-spinner fa-spin"></i>
+                                    กำลังบำบัด
+                                </a>
+                                <a href="{{ route('fah.status',base64_encode(2)) }}" class="btn btn-sm btn-primary">
+                                    <i class="fa-regular fa-circle-check"></i>
+                                    ครบโปรแกรม
+                                </a>
+                                <a href="{{ route('fah.status',base64_encode(3)) }}" class="btn btn-sm btn-primary">
+                                    <i class="fa-regular fa-face-smile-beam"></i>
+                                    รักษาหายขาด
+                                </a>
+                                <a href="{{ route('fah.status',base64_encode(4)) }}" class="btn btn-sm btn-primary">
+                                    <i class="fa-solid fa-user-xmark"></i>
+                                    ติดตามไม่ได้
+                                </a>
+                                <a href="{{ route('fah.status',base64_encode(5)) }}" class="btn btn-sm btn-primary">
+                                    <i class="fa-solid fa-circle-xmark"></i>
+                                    ยกเลิกการบำบัด
+                                </a>
+                                <a href="{{ route('fah.register') }}" class="btn btn-sm btn-success">
+                                    <i class="fa-solid fa-user-plus"></i> ลงทะเบียนผู้ป่วย
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <table id="tableBasic" class="table table-borderless table-striped nowrap" style="font-size: 14px;" width="100%" cellspacing="0">
