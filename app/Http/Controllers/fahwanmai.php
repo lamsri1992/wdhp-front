@@ -29,16 +29,23 @@ class fahwanmai extends Controller
                 LEFT JOIN district ON district.dis_value = patient.patient_htambon
                 GROUP BY district.dis_name
                 ORDER BY total DESC"));
-
         $mooname = DB::select(DB::raw("SELECT 
                 patient.patient_hmooname AS mooname,
                 COUNT(DISTINCT patient.patient_id) AS total
                 FROM patient
                 GROUP BY patient.patient_hmooname
                 ORDER BY total DESC"));
-
+        $hdrug = DB::select(DB::raw("SELECT 
+                hos.h_name AS hos,COUNT(DISTINCT patient.patient_id) AS total
+                FROM patient
+                LEFT JOIN hos ON hos.h_id = patient.patient_hdrug
+                LEFT JOIN patient_program ON patient_program.patient_hn = patient.patient_hn
+                WHERE patient_program.program_id = '2'
+                AND patient.patient_status = '1'
+                GROUP BY hos.h_name
+                ORDER BY total DESC"));
         return view('clinic.fahwanmai.index',['all'=> $all,'finish'=> $finish,'progress'=> $progress,'lost'=> $lost,
-        'count'=> $count,'district'=> $district,'mooname'=> $mooname]);
+        'count'=> $count,'district'=> $district,'mooname'=> $mooname,'hdrug'=> $hdrug]);
     }
 
     public function list()

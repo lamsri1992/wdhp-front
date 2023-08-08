@@ -156,46 +156,26 @@
                 <div class="card-body">
                     <h5 class="card-title">
                         <i class="fa-solid fa-calendar-check"></i>
-                        ตารางออกหน่วยบริการ
+                        จำนวนผู้ป่วยแยกตามหน่วยรับบริการ (การรับเมธาโดน)
                     </h5>
                     <div class="card-body">
-                       <!-- Default Table -->
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">หน่วยบริการ</th>
-                                <th scope="col" class="text-center">วันที่ไปล่าสุด</th>
-                                <th scope="col" class="text-center">วันที่นัดหมาย</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>รพ.สต.แม่ตะละ</td>
-                                <td class="text-center">2566-01-01</td>
-                                <td class="text-center">2566-01-01</td>
-                            </tr>
-                            <tr>
-                                <td>รพ.สต.แม่แดด</td>
-                                <td class="text-center">2566-01-01</td>
-                                <td class="text-center">2566-01-01</td>
-                            </tr>
-                            <tr>
-                                <td>รพ.สต.ห้วยบง</td>
-                                <td class="text-center">2566-01-01</td>
-                                <td class="text-center">2566-06-11</td>
-                            </tr>
-                            <tr>
-                                <td>รพ.สต.แม่ละอูป</td>
-                                <td class="text-center">2566-01-01</td>
-                                <td class="text-center">2566-01-01</td>
-                            </tr>
-                            <tr>
-                                <td>สสช.ขุนแม่รวม</td>
-                                <td class="text-center">2566-01-01</td>
-                                <td class="text-center">2566-01-01</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <!-- Default Table -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">หน่วยบริการ</th>
+                                    <th scope="col" class="text-end">จำนวน</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($hdrug as $drug)
+                                <tr>
+                                    <td>{{ $drug->hos }}</td>
+                                    <td class="text-end">{{ number_format($drug->total)." ราย" }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     <!-- End Default Table Example -->
                     </div>
                 </div>

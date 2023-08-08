@@ -120,7 +120,7 @@
 <!-- Modal -->
 <div class="modal fade" id="hdrug" tabindex="-1" aria-labelledby="hdrugLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form>
+        <form action="{{ route('met.drug',$patient->patient_id) }}">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="hdrugLabel">
@@ -130,7 +130,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <select name="" class="form-select">
+                    <select name="hdrug" class="form-select">
                         <option value="">----- กรุณาเลือก -----</option>
                         @foreach ($hos as $res)
                         <option value="{{ $res->h_id }}"
