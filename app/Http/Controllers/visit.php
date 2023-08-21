@@ -16,7 +16,11 @@ class visit extends Controller
 
     public function index()
     {
-        return view('visit.index');
+        $patient = DB::table('h_patient')->count();
+        $unconfirmed = DB::table('h_patient')->where('consent_status', 1)->count();
+        $confirm = DB::table('h_patient')->where('consent_status', 2)->count();
+        $denied = DB::table('h_patient')->where('consent_status', 3)->count();
+        return view('visit.index',['patient' => $patient,'confirm' => $confirm,'unconfirmed' => $unconfirmed,'denied' => $denied]);
     }
 
     public function search(Request $request)

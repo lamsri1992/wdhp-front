@@ -8,6 +8,74 @@
         </ol>
     </nav>
 </div>
+<section class="section dashboard">
+    <div class="col-lg-12">
+        <div class="row">
+            <!-- Card -->
+            <div class="col-xxl-3 col-md-6">
+                <div class="card info-card sales-card">
+                    <div class="card-body">
+                        <h5 class="card-title">ข้อมูลทั้งหมด</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-users text-primary"></i>
+                            </div>
+                            <div class="ps-3">
+                                <h6>{{ number_format($patient) }} ราย</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-md-6">
+                <div class="card info-card sales-card">
+                    <div class="card-body">
+                        <h5 class="card-title">ยืนยันตัวตนแล้ว</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-user-check text-success"></i>
+                            </div>
+                            <div class="ps-3">
+                                <h6>{{ number_format($confirm) }} ราย</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-md-6">
+                <div class="card info-card sales-card">
+                    <div class="card-body">
+                        <h5 class="card-title">ยังไม่ได้ยืนยันตัวตน</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-user-clock text-warning"></i>
+                            </div>
+                            <div class="ps-3">
+                                <h6>{{ number_format($unconfirmed) }} ราย</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-md-6">
+                <div class="card info-card sales-card">
+                    <div class="card-body">
+                        <h5 class="card-title">ปฏิเสธการเข้าถึง</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-user-xmark text-danger"></i>
+                            </div>
+                            <div class="ps-3">
+                                <h6>{{ number_format($denied) }} ราย</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Card -->
+        </div>
+    </div>
+</section>
 <section class="section">
     <div class="row">
         <div class="col-lg-12">
