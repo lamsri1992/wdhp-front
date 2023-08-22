@@ -52,6 +52,7 @@ Route::group(['prefix' => 'clinic/fahwanmai/methadone'], function () {
 
 Route::group(['prefix' => 'clinic/fahwanmai/matrix'], function () {
 	Route::get('/','matrix@index')->name('mtx.index');
+	Route::get('{id}','matrix@list')->name('mtx.list');
 	Route::get('therapy/{id}','matrix@therapy')->name('mtx.therapy');
 });
 

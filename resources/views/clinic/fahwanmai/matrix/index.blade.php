@@ -14,10 +14,34 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">
-                        <i class="fa-regular fa-clipboard"></i>
-                        รายชื่อผู้เข้ารับการบำบัด : Matrix Program
-                    </h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="card-title">
+                                <i class="fa-regular fa-clipboard"></i>
+                                รายชื่อผู้เข้ารับการบำบัด : Matrix Program
+                            </h5>
+                        </div>
+                        <div class="col-md-6 text-end" style="margin-top: 1rem;">
+                            <div class="btn-group" role="group">
+                                <a href="{{ route('mtx.list',base64_encode(0)) }}" class="btn btn-sm btn-primary">
+                                    <i class="fa-solid fa-list"></i>
+                                    ทั้งหมด
+                                </a>
+                                <a href="{{ route('mtx.list',base64_encode(1)) }}" class="btn btn-sm btn-primary">
+                                    <i class="fa-solid fa-spinner fa-spin"></i>
+                                    กำลังบำบัด
+                                </a>
+                                <a href="{{ route('mtx.list',base64_encode(3)) }}" class="btn btn-sm btn-primary">
+                                    <i class="fa-regular fa-face-smile-beam"></i>
+                                    รักษาหายขาด
+                                </a>
+                                <a href="{{ route('mtx.list',base64_encode(4)) }}" class="btn btn-sm btn-primary">
+                                    <i class="fa-solid fa-user-xmark"></i>
+                                    ติดตามไม่ได้
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <table id="tableBasic" class="table table-borderless table-striped nowrap"
                     style="font-size: 14px;" width="100%" cellspacing="0">
                         <thead class="thead-dark">
