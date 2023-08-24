@@ -82,8 +82,8 @@ a<!-- ======= Sidebar ======= -->
             </a>
             <ul id="anc-nav" class="nav-content collapse {{ (request()->is('clinic/anc*')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="#" class="#">
-                        <i class="bi bi-circle"></i><span>Dashboard</span>
+                    <a href="{{ route('anc.index') }}" class="{{ (request()->is('clinic/anc*')) ? 'active' : '' }}">
+                        <i class="bi bi-circle"></i><span>ทะเบียนฝากครรภ์</span>
                     </a>
                 </li>
                 <li>

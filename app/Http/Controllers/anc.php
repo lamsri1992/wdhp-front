@@ -12,6 +12,16 @@ class anc extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        return view('clinic.anc.index');
+    }
+
+    public function show($id)
+    {
+        return view('clinic.anc.show',['id'=>$id]);
+    }
+
     public function report(Request $request)
     {
         $dstart = $request->dstart;
