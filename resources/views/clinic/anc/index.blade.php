@@ -127,7 +127,7 @@
                         });
                     });
                 },
-                ajax: "http://203.157.209.59:8551/anc/list",
+                ajax: "http://203.157.209.59:8550/anc/list",
                 // ajax: "http://127.0.0.1:8550/anc/list",
                 columns: 
                 [
