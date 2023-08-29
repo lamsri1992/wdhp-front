@@ -74,6 +74,7 @@ a<!-- ======= Sidebar ======= -->
                 </li>
             </ul>
         </li>
+        <!-- ANC Nav -->
         <li class="nav-item">
             <a class="nav-link {{ (request()->is('clinic/anc*')) ? '' : 'collapsed' }}"
                 data-bs-target="#anc-nav" data-bs-toggle="collapse" href="#">
@@ -94,6 +95,7 @@ a<!-- ======= Sidebar ======= -->
             </ul>
         </li>
         <!-- End ANC Nav -->
+        <!-- NCD Nav -->
         <li class="nav-item">
             <a class="nav-link {{ (request()->is('clinic/ncd*')) ? '' : 'collapsed' }}"
                 data-bs-target="#ncd-nav" data-bs-toggle="collapse" href="#">
@@ -114,6 +116,22 @@ a<!-- ======= Sidebar ======= -->
             </ul>
         </li>
         <!-- End NCD Nav -->
+        <!-- ANC Nav -->
+        <li class="nav-item">
+            <a class="nav-link {{ (request()->is('clinic/geriatric*')) ? '' : 'collapsed' }}"
+                data-bs-target="#geriatric-nav" data-bs-toggle="collapse" href="#">
+                <span>คลินิกผู้สูงอายุ</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="geriatric-nav" class="nav-content collapse {{ (request()->is('clinic/geriatric*')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('geriatric.index') }}" class="{{ (request()->is('clinic/geriatric*')) ? 'active' : '' }}">
+                        <i class="bi bi-circle"></i><span>ทะเบียนผู้สูงอายุ</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- End ANC Nav -->
         <li class="nav-heading">ระบบบริการ</li>
         <!-- Health Nav -->
         <li class="nav-item">

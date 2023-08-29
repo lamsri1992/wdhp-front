@@ -100,6 +100,10 @@ Route::group(['prefix' => 'clinic/anc'], function () {
 	Route::get('{id}','anc@show')->name('anc.show');
 });
 
+Route::group(['prefix' => 'clinic/geriatric'], function () {
+	Route::get('','geriatric@index')->name('geriatric.index');
+});
+
 Route::group(['prefix' => 'clinic/ncd'], function () {
 	Route::get('','ncd@index')->name('ncd.index');
 	Route::get('/report','ncd@report')->name('ncd.report');

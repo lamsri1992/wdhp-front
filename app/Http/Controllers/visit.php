@@ -62,22 +62,22 @@ class visit extends Controller
         if(empty($img)){
             return back()->with('error','ไม่พบรูปภาพ กรุณาลองใหม่อีกครั้ง');
         }else{
-            // $folderPath = "uploads/";
+            $patient = DB::table('h_patient')->where('id',$id)->first();
+            $cid = base64_encode($patient->idcard);
+            
             $folderPath = "public/uploads/"; 
             $image_parts = explode(";base64,", $img);
             $image_type_aux = explode("image/", $image_parts[0]);
             $image_type = $image_type_aux[1];
             
             $image_base64 = base64_decode($image_parts[1]);
-            $fileName = $id . '.png';
+            $fileName = $patient->idcard . '.png';
             
             $file = $folderPath . $fileName;
             Storage::put($file, $image_base64);
 
-            $patient = DB::table('h_patient')->where('id',$id)->first();
-            $cid = base64_encode($patient->idcard);
 
-            DB::table('h_patient')->where('id',$patient->id)->update(
+            DB::table('h_patient')->where('idcard',$patient->idcard)->update(
                 [ 
                     "consent_status" => 2,
                     "consent_approve" => Auth::user()->name,
