@@ -27,7 +27,6 @@
                                 <th class="text-center">วันที่ฝากครรภ์</th>
                                 <th class="text-center">จำนวนการตั้งครรภ์</th>
                                 <th class="">ความเสี่ยง</th>
-                                <th class="">หมายเหตุความเสี่ยง</th>
                                 <th class="text-center">อายุครรภ์ : Week</th>
                                 <th class="text-center">จำนวนการรับบริการ</th>
                                 <th class="text-center">วันที่คลอด</th>
@@ -43,7 +42,6 @@
                                 <th></th>
                                 <th></th>
                                 <th width="15%"></th>
-                                <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -105,7 +103,7 @@
                 },
                 initComplete: function() 
                 {
-                    this.api().columns([4,9]).every(function() {
+                    this.api().columns([4,8]).every(function() {
                         var column = this;
                         var select = $(
                                 '<select class="form-select" style="text-align-last:center;font-size:14px;">' + 
@@ -154,7 +152,6 @@
                             }
                         }
                     },
-                    { data: 'risk_list' , className: "text-center" },
                     { data: 'preg_age' , className: "text-center" },
                     { data: 'service_count' , className: "text-center" },
                     { data: 'labor_date' , className: "text-center" , 
@@ -176,18 +173,6 @@
                 ],
             });
             
-            var myTable = $('#ancList').DataTable();
-            var tableEdits = myTable.rows().data();
-            if(tableEdits)
-            {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'API CONNECTED',
-                    text: 'เชื่อมต่อข้อมูลสำเร็จ',
-                    showConfirmButton: false,
-                    timer: 2000,
-                })
-            }
-    });
+        });
 </script>
 @endsection
