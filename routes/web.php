@@ -99,6 +99,7 @@ Route::group(['prefix' => 'clinic/anc'], function () {
 	Route::get('report','anc@report')->name('anc.report');
 	Route::get('{id}','anc@show')->name('anc.show');
 	Route::get('risk/{id}','anc@risk')->name('anc.risk');
+	Route::get('riskLevel/{id}','anc@risk_level')->name('anc.risk_level');
 });
 
 Route::group(['prefix' => 'clinic/geriatric'], function () {

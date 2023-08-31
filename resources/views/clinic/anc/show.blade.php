@@ -82,6 +82,24 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-risk" role="tabpanel" aria-labelledby="nav-risk-tab">
+                            <div style="margin-top: 1rem;">
+                                <div class="col-md-6">
+                                    <h5>
+                                        <i class="fa-solid fa-list-ol"></i>
+                                        ระดับความเสี่ยง
+                                    </h5>
+                                </div>
+                                <div class="col-md-12" style="margin-bottom: 1rem;">
+                                    <select id="risk_level" class="form-select" onchange="riskFunction()">
+                                        @foreach ($score as $res)
+                                        <option value="{{ $res->rs_id }}"
+                                            {{ (@$iscore->person_level_id == $res->rs_id) ? 'SELECTED' : '' }}>
+                                            {{ $res->rs_name }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                             <div id="risk" style="margin-top: 0.5rem;">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -156,8 +174,8 @@
  $( document ).ready(function() {
         var pid = document.getElementById("pid").value;
         $.ajax({
-            url: "http://127.0.0.1:8550/anc/" + pid,
-            // url: "http://203.157.209.59:8550/anc/" + pid,
+            // url: "http://127.0.0.1:8550/anc/" + pid,
+            url: "http://203.157.209.59:8550/anc/" + pid,
             success: function (data) {
                 $('.personal').html("");
 
@@ -233,8 +251,8 @@
         });
 
         $.ajax({
-            url: "http://127.0.0.1:8550/service/" + pid,
-            // url: "http://203.157.209.59:8550/anc/" + pid,
+            // url: "http://127.0.0.1:8550/service/" + pid,
+            url: "http://203.157.209.59:8550/service/" + pid,
             success: function (data) {
                 $('#serviceTable tbody').html("");
                 for (var i = 0; i < data.data.length; i++) {
@@ -274,6 +292,24 @@
             }
         });
     });
+
+    function riskFunction(sel) {
+        var val = document.getElementById("risk_level").value;
+        var text = $("#risk_level option:selected" ).text();
+        var token = "{{ csrf_token() }}";
+        Swal.fire({
+            icon: 'success',
+            title: text,
+            text: 'ปรับปรุงระดับความเสี่ยงแล้ว'
+        })
+        $.ajax({
+            url: "{{ route('anc.risk_level',$id) }}",
+            data:{val: val,_token: token},
+            success: function (data) {
+                
+            }
+        });
+    }
 
     $('.insertFrm').on("click", function (event) {
         var pid = document.getElementById("pid").value;
