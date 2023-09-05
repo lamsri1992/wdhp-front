@@ -154,13 +154,32 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-lab" role="tabpanel" aria-labelledby="nav-lab-tab">
-                            ...
+                            <div style="margin-top: 0.5rem;">
+                                <table id="labTable" class="table table-bordered table-borderless table-striped text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>วันที่</th>
+                                            <th>VN</th>
+                                            <th>ICD10</th>
+                                            <th>รายการ LAB</th>
+                                            <th>ผลตรวจ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="nav-note" role="tabpanel" aria-labelledby="nav-note-tab">
-                            ...
+                            <div class="margin-top: 0.5rem;">
+                                <i class="fa-solid fa-code"></i>
+                                อยู่ระหว่างพัฒนาระบบ
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="nav-refer" role="tabpanel" aria-labelledby="nav-refer-tab">
-                            ...
+                            <div class="margin-top: 0.5rem;">
+                                <i class="fa-solid fa-code"></i>
+                                อยู่ระหว่างพัฒนาระบบ
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -291,6 +310,49 @@
                 })
             }
         });
+
+        $.ajax({
+            // url: "http://127.0.0.1:8550/ancLabs/" + pid,
+            url: "http://203.157.209.59:8550/ancLabs/" + pid,
+            success: function (data) {
+                $('#labTable tbody').html("");
+                for (var i = 0; i < data.data.length; i++) {
+                    // Date-Format
+                    const vst_date = new Date(data.data[i].vstdate);
+                    function formatDate(date) {
+                        var d = new Date(date),
+                        month = '' + (d.getMonth() + 1),
+                        day = '' + d.getDate(),
+                        year = d.getFullYear() + 543;
+                        
+                        if (month.length < 2) 
+                            month = '0' + month;
+                        if (day.length < 2) 
+                            day = '0' + day;
+                        return [day, month, year].join('/');
+                    }
+                    vstdate = formatDate(vst_date);
+                    var row =
+                    $(
+                        '<tr>' +
+                            '<td>' + vstdate + '</td>' +
+                            '<td>' + data.data[i].vn + '</td>' +
+                            '<td>' + data.data[i].icd10 + '</td>' +
+                            '<td>' + data.data[i].lab_items_name_ref + '</td>' +
+                            '<td>' + data.data[i].lab_order_result + '</td>' +
+                        '</tr>'
+                    );
+                        $('#labTable').append(row);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'ไม่สามารถเชื่อมต่อ API LAB ANC ได้',
+                        text: 'Error: ' + textStatus + ' - ' + errorThrown,
+                    })
+                }
+            });
     });
 
     function riskFunction(sel) {
