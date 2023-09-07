@@ -167,11 +167,11 @@
                                                 <table id="labTable" class="table table-bordered table-borderless table-striped text-center">
                                                     <thead>
                                                         <tr>
-                                                            <th>วันที่</th>
-                                                            <th>VN</th>
-                                                            <th>ICD10</th>
-                                                            <th>รายการ LAB</th>
-                                                            <th>ผลตรวจ</th>
+                                                            <th width="10%">วันที่</th>
+                                                            <th width="20%">VN</th>
+                                                            <th width="20%">ICD10</th>
+                                                            <th width="20%">รายการ LAB</th>
+                                                            <th width="20%">ผลตรวจ</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody></tbody>
@@ -188,7 +188,7 @@
                                                 <table id="labTable2" class="table table-bordered table-borderless table-striped text-center">
                                                     <thead>
                                                         <tr>
-                                                            <th>VN</th>
+                                                            <th width="20%">VN</th>
                                                             <th width="10%">วันที่ส่งตรวจ</th>
                                                             <th width="20%">รายการ LAB</th>
                                                             <th>ผลตรวจ</th>
@@ -289,6 +289,10 @@
                                 '<td class=""><b><i class="fa-regular fa-calendar-check"></i> วันที่ฝากครรภ์ : </b>' + reg + ' <small class="text-muted">[ ล่าสุด ]</small> ' + 
                                     '<span class="badge bg-success"> อายุครรภ์ - '+ data.data[0].preg_age +' Week</span></td>' +
                                 '<td class=""><b>ความเสี่ยง : </b>' + risk + risk_list + '</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td class=""><b>สามี : </b>' + data.data[0].husband + '</td>' +
+                                '<td class=""><b>เลขบัตรประชาชน (สามี) : </b>' + data.data[0].couple_cid + '</td>' +
                             '</tr>' +
                         '</table>'
                     );
