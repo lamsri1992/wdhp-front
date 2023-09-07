@@ -330,7 +330,7 @@
                     $(
                         '<tr>'+
                             '<td class="text-center">' + data[i].icode + '</td>' +
-                            '<td class="">' + data[i].name + '</td>' +
+                            '<td class="">' + data[i].name + ' : ' + data[i].therapeutic + '</td>' +
                             '<td class="text-center">' + data[i].qty + '</td>' +
                         '</tr>'
                     );
