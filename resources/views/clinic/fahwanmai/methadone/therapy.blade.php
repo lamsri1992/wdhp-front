@@ -95,9 +95,10 @@
                                         <table id="drug" class="table">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center" style="width: 30%;">รหัสยา</th>
+                                                    <th class="text-center" style="width: 10%;">รหัสยา</th>
                                                     <th class="" style="width: 40%;">รายการยา</th>
                                                     <th class="text-center" style="width: 10%;">จำนวน</th>
+                                                    <th class="text-center" style="width: 40%;">วิธีใช้ยา</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -386,6 +387,7 @@
                             '<td class="text-center">' + data[i].icode + '</td>' +
                             '<td class="">' + data[i].name + ' : ' + data[i].therapeutic + '</td>' +
                             '<td class="text-center">' + data[i].qty + '</td>' +
+                            '<td class="text-center">' + data[i].name1 + ' : ' + data[i].name2 + '</td>' +
                         '</tr>'
                     );
                     $('#drug').append(row);
