@@ -155,18 +155,52 @@
                         </div>
                         <div class="tab-pane fade" id="nav-lab" role="tabpanel" aria-labelledby="nav-lab-tab">
                             <div style="margin-top: 0.5rem;">
-                                <table id="labTable" class="table table-bordered table-borderless table-striped text-center">
-                                    <thead>
-                                        <tr>
-                                            <th>วันที่</th>
-                                            <th>VN</th>
-                                            <th>ICD10</th>
-                                            <th>รายการ LAB</th>
-                                            <th>ผลตรวจ</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
+                                <div class="accordion" id="accordionLab">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading-1">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLab-1" aria-expanded="true" aria-controls="collapseLab-1">
+                                                LAB ANC # 1
+                                            </button>
+                                        </h2>
+                                        <div id="collapseLab-1" class="accordion-collapse collapse" aria-labelledby="heading-1" data-bs-parent="#accordionLab">
+                                            <div class="accordion-body">
+                                                <table id="labTable" class="table table-bordered table-borderless table-striped text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>วันที่</th>
+                                                            <th>VN</th>
+                                                            <th>ICD10</th>
+                                                            <th>รายการ LAB</th>
+                                                            <th>ผลตรวจ</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <h2 class="accordion-header" id="heading-2">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLab-2" aria-expanded="true" aria-controls="collapseLab-2">
+                                                LAB ANC # 2
+                                            </button>
+                                        </h2>
+                                        <div id="collapseLab-2" class="accordion-collapse collapse" aria-labelledby="heading-2" data-bs-parent="#accordionLab">
+                                            <div class="accordion-body">
+                                                <table id="labTable2" class="table table-bordered table-borderless table-striped text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>VN</th>
+                                                            <th width="10%">วันที่ส่งตรวจ</th>
+                                                            <th width="20%">รายการ LAB</th>
+                                                            <th>ผลตรวจ</th>
+                                                            <th width="10%">วันที่รายงานผล</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-note" role="tabpanel" aria-labelledby="nav-note-tab">
@@ -343,6 +377,52 @@
                         '</tr>'
                     );
                         $('#labTable').append(row);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'ไม่สามารถเชื่อมต่อ API LAB ANC ได้',
+                        text: 'Error: ' + textStatus + ' - ' + errorThrown,
+                    })
+                }
+            });
+
+            $.ajax({
+            // url: "http://127.0.0.1:8550/ancLabs2/" + pid,
+            url: "http://203.157.209.59:8550/ancLabs2/" + pid,
+            success: function (data) {
+                $('#labTable2 tbody').html("");
+                for (var i = 0; i < data.data.length; i++) {
+                    // Date-Format
+                    const odr_date = new Date(data.data[i].order_date);
+                    const rpt_date = new Date(data.data[i].report_date);
+                    function formatDate(date) {
+                        var d = new Date(date),
+                        month = '' + (d.getMonth() + 1),
+                        day = '' + d.getDate(),
+                        year = d.getFullYear() + 543;
+                        
+                        if (month.length < 2) 
+                            month = '0' + month;
+                        if (day.length < 2) 
+                            day = '0' + day;
+                        return [day, month, year].join('/');
+                    }
+                    odrdate = formatDate(odr_date);
+                    rptdate = formatDate(rpt_date);
+
+                    var row =
+                    $(
+                        '<tr>' +
+                            '<td>' + data.data[i].vn + '</td>' +
+                            '<td>' + odrdate + '</td>' +
+                            '<td>' + data.data[i].lab_items_name_ref + '</td>' +
+                            '<td>' + data.data[i].lab_order_result + '</td>' +
+                            '<td>' + rptdate + '</td>' +
+                        '</tr>'
+                    );
+                        $('#labTable2').append(row);
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
